@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/reassign_id"
+        android:title="Assign to different location"
+        />
+
+    <item
+        android:id="@+id/remove_pallet"
+        android:title="Remove from current location"
+        />
+
+    <item
+        android:id="@+id/delete_pallet"
+        android:title="Permanently delete pallet"
+        />
+
+
+</menu>

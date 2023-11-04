@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="-1dp">
+
+    <AutoCompleteTextView
+        android:id="@+id/size2"
+        android:layout_width="75dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="16dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/SizeTwo"
+        app:layout_constraintEnd_toStartOf="@+id/quantity1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/style2"
+        android:layout_width="72dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="80dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/StyleTwo"
+        app:layout_constraintEnd_toStartOf="@+id/color1"
+        app:layout_constraintHorizontal_bias="0.737"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/style1"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/StyleOne"
+        app:layout_constraintEnd_toStartOf="@+id/color1"
+        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/color1"
+        android:layout_width="73dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/ColorOne"
+        app:layout_constraintEnd_toStartOf="@+id/size1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/color2"
+        android:layout_width="77dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="8dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/ColorTwo"
+        app:layout_constraintEnd_toStartOf="@+id/size1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/size1"
+        android:layout_width="78dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/SizeOne"
+        app:layout_constraintEnd_toStartOf="@+id/quantity1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <EditText
+        android:id="@+id/quantity1"
+        android:layout_width="81dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="@string/QuantityOne"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <EditText
+        android:id="@+id/quantity2"
+        android:layout_width="77dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/QuantityTwo"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/color3"
+        android:layout_width="78dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="4dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/ColorThree"
+        app:layout_constraintEnd_toStartOf="@+id/size1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/size3"
+        android:layout_width="75dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="16dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/SizeThree"
+        app:layout_constraintEnd_toStartOf="@+id/quantity1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <EditText
+        android:id="@+id/quantity3"
+        android:layout_width="77dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/QuantityThree"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/style4"
+        android:layout_width="78dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="196dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/StyleFour"
+        app:layout_constraintEnd_toStartOf="@+id/color1"
+        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/color4"
+        android:layout_width="78dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="8dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/ColorFour"
+        app:layout_constraintEnd_toStartOf="@+id/size1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/size4"
+        android:layout_width="74dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="16dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/SizeFour"
+        app:layout_constraintEnd_toStartOf="@+id/quantity1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <EditText
+        android:id="@+id/quantity4"
+        android:layout_width="77dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="196dp"
+        android:layout_marginEnd="24dp"
+        android:hint="@string/QuantityFour"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/style3"
+        android:layout_width="75dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="136dp"
+        android:completionThreshold="1"
+        android:dropDownWidth="fill_parent"
+        android:hint="@string/StyleThree"
+        app:layout_constraintEnd_toStartOf="@+id/color1"
+        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <Button
+        android:id="@+id/btn_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="@string/CreateBtn"
+        app:layout_constraintBottom_toTopOf="@+id/lv_palletList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_addPalletLocation"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/style_title"
+        android:layout_width="221dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/CreatePallet"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/lv_palletList"
+        android:layout_width="366dp"
+        android:layout_height="246dp"
+        android:layout_marginTop="116dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/size4" />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/SearchBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/style_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/et_palletLocation"
+        android:layout_width="323dp"
+        android:layout_height="52dp"
+        android:completionThreshold="1"
+        android:hint="@string/PalletLocation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style4"
+        app:layout_constraintVertical_bias="0.026" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

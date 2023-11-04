@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">U.S Apparel Inventory App (beta)</string>
+    <string name="Item1">Item1</string>
+    <string name="Item2">Item2</string>
+    <string name="CreatePallet">Create New Pallet</string>
+    <string name="Item3">Item3</string>
+    <string name="Item4">Item4</string>
+    <string name="CreateBtn">Create</string>
+    <string name="SearchBtn">Search</string>
+    <string name="Location">Location</string>
+    <string name="PalletLocation">Pallet Location</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="CreateColor">Create New Color</string>
+    <string name="Color">color</string>
+    <string name="CreateStyle">Create New Style</string>
+    <string name="Style">style</string>
+    <string name="CreateLocation">Create New Location</string>
+    <string name="NewLoacation">new location</string>
+    <string name="CreateSize">Create New Size</string>
+    <string name="Size">new size</string>
+    <string name="StyleOne">style1</string>
+    <string name="StyleThree">style3</string>
+    <string name="StyleFour">style4</string>
+    <string name="ColorTwo">color2</string>
+    <string name="ColorOne">color1</string>
+    <string name="ColorThree">color3</string>
+    <string name="ColorFour">color4</string>
+    <string name="SizeOne">size1</string>
+    <string name="SizeTwo">size2</string>
+    <string name="SizeThree">size3</string>
+    <string name="SizeFour">size4</string>
+    <string name="QuantityOne">Qty.1</string>
+    <string name="QuantityTwo">Qty.2</string>
+    <string name="QuantityThree">Qty.3</string>
+    <string name="QuantityFour">Qty.4</string>
+    <string name="StyleTwo">style2</string>
+    <string name="StartSearch">Search</string>
+    <string name="CreateSreach">Search Style</string>
+    <string name="SearchHint">search style</string>
+    <string name="GenerateCSV">Generate CSV</string>
+    <string name="addStyle">Add Stye To Pallet</string>
+    <string name="AddButton">Add</string>
+</resources>
