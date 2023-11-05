@@ -1,4 +1,4 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.dataBase;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -9,10 +9,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.usapparelinventoryapp.dto.StyleSearchByLocationDTO;
+import com.example.usapparelinventoryapp.dto.StyleSearchDTO;
+import com.example.usapparelinventoryapp.models.ColorModel;
+import com.example.usapparelinventoryapp.models.LocationModel;
+import com.example.usapparelinventoryapp.models.PalletModel;
+import com.example.usapparelinventoryapp.models.PalletStylesModel;
+import com.example.usapparelinventoryapp.models.SizeModel;
+import com.example.usapparelinventoryapp.models.StyleModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class DAO extends SQLiteOpenHelper {
+public class DataBaseHelper extends SQLiteOpenHelper {
 
     public static final String size_table = "size_table";
     public static final String size = "size";
@@ -45,7 +54,7 @@ public class DAO extends SQLiteOpenHelper {
 
 
 
-    public DAO(@Nullable Context context) {
+    public DataBaseHelper(@Nullable Context context) {
         super(context, "pallets.db", null, 1);
     }
 
@@ -2737,7 +2746,7 @@ public class DAO extends SQLiteOpenHelper {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    List<StyleSearchByLocationDTO> getPalletStylesByLocation(String location) {
+    public List<StyleSearchByLocationDTO> getPalletStylesByLocation(String location) {
 
         List<StyleSearchByLocationDTO> returnSearchList = new ArrayList<>();
 
@@ -2802,7 +2811,7 @@ public class DAO extends SQLiteOpenHelper {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ArrayList<String> getStylesSearchcsv(String searchTerm) {
+    public ArrayList<String> getStylesSearchcsv(String searchTerm) {
 
         ArrayList<String> returnSearchList = new ArrayList<>();
 
@@ -2865,7 +2874,7 @@ public class DAO extends SQLiteOpenHelper {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    List<StyleSearchDTO> getStylesSearch(String searchTerm) {
+    public List<StyleSearchDTO> getStylesSearch(String searchTerm) {
 
         List<StyleSearchDTO> returnSearchList = new ArrayList<>();
 

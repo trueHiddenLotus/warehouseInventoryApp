@@ -1,17 +1,14 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.screens;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultCaller;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.core.content.res.TypedArrayUtils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -30,15 +27,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.usapparelinventoryapp.customAdapters.CustomAdapterSearch;
+import com.example.usapparelinventoryapp.dataBase.DataBaseHelper;
+import com.example.usapparelinventoryapp.R;
+import com.example.usapparelinventoryapp.dto.StyleSearchDTO;
+
 import java.io.File;
 import java.io.FileOutputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-public class MainActivity8 extends AppCompatActivity {
+public class SearchScreen extends AppCompatActivity {
 
 //    private static final int PERMISSION_REQUEST_CODE = 100;
 
@@ -52,7 +51,7 @@ public class MainActivity8 extends AppCompatActivity {
     ArrayAdapter searchArrayAdapter;
     ArrayAdapter searchArrayAdaptera;
     //
-    DAO databaseHelper;
+    DataBaseHelper databaseHelper;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -64,7 +63,7 @@ public class MainActivity8 extends AppCompatActivity {
         btn_create_search = findViewById(R.id.btn_create_search);
                 btn_search = findViewById(R.id.btn_search);
         lv_searchLista = findViewById(R.id.lv_searchLista);
-        databaseHelper = new DAO( MainActivity8.this);
+        databaseHelper = new DataBaseHelper( SearchScreen.this);
         allsearch = databaseHelper.getAllSizesA();
 //        ShowSearchOnListView(databaseHelper, String searchTerm);
 //        ShowSizesAuto(databaseHelper);
@@ -86,12 +85,12 @@ public class MainActivity8 extends AppCompatActivity {
             String searchTerm = searchAutoCompleteTextView.getText().toString();
 
 
-            DAO dataBaseHelper = new DAO(MainActivity8.this);
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(SearchScreen.this);
 
             dataBaseHelper.getStylesSearch(searchTerm);
 //            databaseHelper.getStylesSearch(searchTerm).add("Style Code", "style_color", "style_size", 0 , "pallet_location");
 
-//            searchArrayAdapter = new ArrayAdapter<StyleSearchDTO>(MainActivity8.this, android.R.layout.simple_list_item_1, dataBaseHelper.getStylesSearch(searchTerm));
+//            searchArrayAdapter = new ArrayAdapter<StyleSearchDTO>(SearchScreen.this, android.R.layout.simple_list_item_1, dataBaseHelper.getStylesSearch(searchTerm));
 //            lv_searchLista.setAdapter(searchArrayAdapter);
 
             ShowSearchOnListView(dataBaseHelper, searchTerm);
@@ -102,7 +101,7 @@ public class MainActivity8 extends AppCompatActivity {
     }
 
     private void DoItNow() {
-        DAO dataBaseHelper = new DAO(MainActivity8.this);
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(SearchScreen.this);
 
         String searchTerm = "";
         String[] each_item1 = dataBaseHelper.getStylesSearchcsv(searchTerm).toString().split("@");
@@ -206,10 +205,10 @@ public class MainActivity8 extends AppCompatActivity {
 
     // request permission for WRITE Access
 //    private void requestPermission() {
-//        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity8.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-//            Toast.makeText(MainActivity8.this, "Write External Storage permission allows us to save files. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
+//        if (ActivityCompat.shouldShowRequestPermissionRationale(SearchScreen.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//            Toast.makeText(SearchScreen.this, "Write External Storage permission allows us to save files. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
 //        } else {
-//            ActivityCompat.requestPermissions(MainActivity8.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
+//            ActivityCompat.requestPermissions(SearchScreen.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
 //        }
 //    }
     private void requestPermission(){
@@ -254,7 +253,7 @@ public class MainActivity8 extends AppCompatActivity {
                         }
                         else{
                             Log.d(TAG, "onActivityResult: Manage External Storage Permission is denied");
-                            Toast.makeText(MainActivity8.this, "Manage External Storgae Permaission is denied", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SearchScreen.this, "Manage External Storgae Permaission is denied", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else {
@@ -310,7 +309,7 @@ public class MainActivity8 extends AppCompatActivity {
 //        }
 //    }
 
-    private void ShowSearchOnListView(DAO dataBaseHelper, String searchTerm) {
+    private void ShowSearchOnListView(DataBaseHelper dataBaseHelper, String searchTerm) {
 //        ArrayList  ListViewConverter = new ArrayList<>();
 //        for (int i = 0; i< databaseHelper.getStylesSearch(searchTerm).size(); i++){
 //            List<String> styleCode = Collections.singletonList(databaseHelper.getStylesSearch(searchTerm).get(i).getStyle_code().toString());
@@ -332,12 +331,12 @@ public class MainActivity8 extends AppCompatActivity {
 //            ListViewConverter.add(fullLine);
 //
 //        }
-        CustomAdapterSearch  customAdapterSearch = new CustomAdapterSearch(getApplicationContext(), (ArrayList<StyleSearchDTO>) dataBaseHelper.getStylesSearch(searchTerm));
-//        searchArrayAdapter = new ArrayAdapter<StyleSearchDTO>(MainActivity8.this, android.R.layout.simple_list_item_1, ListViewConverter);
+        CustomAdapterSearch customAdapterSearch = new CustomAdapterSearch(getApplicationContext(), (ArrayList<StyleSearchDTO>) dataBaseHelper.getStylesSearch(searchTerm));
+//        searchArrayAdapter = new ArrayAdapter<StyleSearchDTO>(SearchScreen.this, android.R.layout.simple_list_item_1, ListViewConverter);
         lv_searchLista.setAdapter(customAdapterSearch);
     }
-//    private void ShowSizesAuto(DAO databaseHelper) {
-//        sizeArrayAdaptera = new ArrayAdapter<>(MainActivity7.this, android.R.layout.simple_list_item_1, allsize);
+//    private void ShowSizesAuto(DataBaseHelper databaseHelper) {
+//        sizeArrayAdaptera = new ArrayAdapter<>(CreateSizesScreen.this, android.R.layout.simple_list_item_1, allsize);
 //        sizeAutoCompleteTextView.setAdapter(sizeArrayAdaptera);
 //    }
 

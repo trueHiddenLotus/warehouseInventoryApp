@@ -1,4 +1,4 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,15 +11,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.usapparelinventoryapp.customAdapters.CustomAdapterSize;
+import com.example.usapparelinventoryapp.dataBase.DataBaseHelper;
+import com.example.usapparelinventoryapp.R;
+import com.example.usapparelinventoryapp.models.SizeModel;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class MainActivity7 extends AppCompatActivity {
+public class CreateSizesScreen extends AppCompatActivity {
 
     Button btn_create_size;
     AutoCompleteTextView sizeAutoCompleteTextView ;
@@ -29,7 +32,7 @@ public class MainActivity7 extends AppCompatActivity {
     ArrayAdapter sizeArrayAdapter;
     ArrayAdapter sizeArrayAdaptera;
     //
-    DAO databaseHelper;
+    DataBaseHelper databaseHelper;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,7 +44,7 @@ public class MainActivity7 extends AppCompatActivity {
         btn_create_size = findViewById(R.id.btn_create_size);
         //        btn_search = findViewById(R.id.btn_search);
         lv_sizeLista = findViewById(R.id.lv_sizeLista);
-        databaseHelper = new DAO( MainActivity7.this);
+        databaseHelper = new DataBaseHelper( CreateSizesScreen.this);
         allsize = databaseHelper.getAllSizesA();
         ShowSizesOnListView(databaseHelper);
         ShowSizesAuto(databaseHelper);
@@ -64,14 +67,14 @@ public class MainActivity7 extends AppCompatActivity {
 
             try {
                 sizeModel = new SizeModel(lv_sizeLista.getCount() + 1 , sizeAutoCompleteTextView.getText().toString());
-                Toast.makeText(MainActivity7.this, sizeModel.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateSizesScreen.this, sizeModel.toString(), Toast.LENGTH_SHORT).show();
             }
             catch (Exception e) {
-                Toast.makeText(MainActivity7.this, "Error creating size", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateSizesScreen.this, "Error creating size", Toast.LENGTH_SHORT).show();
                 sizeModel = new SizeModel(-1, "error");
             }
 
-            DAO dataBaseHelper = new DAO(MainActivity7.this);
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(CreateSizesScreen.this);
 
             boolean success = dataBaseHelper.addSize(sizeModel);
 
@@ -85,21 +88,21 @@ public class MainActivity7 extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 SizeModel selectedLocation = (SizeModel) lv_sizeLista.getItemAtPosition(position);
-//                Toast.makeText(MainActivity5.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
 //
 //                StringBuilder sb = new StringBuilder(selectedLocation);
 //                sb.delete(10, sb.length()-1);
-//                Toast.makeText(MainActivity5.this, sb.length() + "", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CreateLocationsScreen.this, sb.length() + "", Toast.LENGTH_SHORT).show();
 ////                sb.deleteCharAt(9);
 //
 //                selectedLocation = sb.toString();
-//                Toast.makeText(MainActivity5.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
 
 
 
                 SizeModel finalSelectedLocation = selectedLocation;
                 String finalSelectedLocation1 = selectedLocation.getSize();
-                new AlertDialog.Builder(MainActivity7.this)
+                new AlertDialog.Builder(CreateSizesScreen.this)
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Are you sure ?")
                         .setMessage("Do you want to delete this location")
@@ -108,7 +111,7 @@ public class MainActivity7 extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                                 databaseHelper.deleteSize(finalSelectedLocation);
-                                Toast.makeText(MainActivity7.this,  "Location "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CreateSizesScreen.this,  "Location "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
                                 ShowSizesOnListView(databaseHelper);
                             }
                         })
@@ -148,7 +151,7 @@ public class MainActivity7 extends AppCompatActivity {
 
         return size;
     }
-    private void ShowSizesOnListView(DAO dataBaseHelper) {
+    private void ShowSizesOnListView(DataBaseHelper dataBaseHelper) {
 //        ArrayList  ListViewConverter = new ArrayList<>();
 //        for (int i = 0; i< dataBaseHelper.getAllSizes().size(); i++){
 ////            List<String> location_id = Collections.singletonList(String.valueOf(Collections.singletonList(alllocationlv.get(i).getLocation_id())));
@@ -164,11 +167,11 @@ public class MainActivity7 extends AppCompatActivity {
 //            ListViewConverter.add(fullLine);
 //
 //        }
-        CustomAdapterSize  customAdapterSize = new CustomAdapterSize(getApplicationContext(), (ArrayList<SizeModel>) dataBaseHelper.getAllSizes());
+        CustomAdapterSize customAdapterSize = new CustomAdapterSize(getApplicationContext(), (ArrayList<SizeModel>) dataBaseHelper.getAllSizes());
         lv_sizeLista.setAdapter(customAdapterSize);
     }
-    private void ShowSizesAuto(DAO databaseHelper) {
-        sizeArrayAdaptera = new ArrayAdapter<>(MainActivity7.this, android.R.layout.simple_list_item_1, allsize);
+    private void ShowSizesAuto(DataBaseHelper databaseHelper) {
+        sizeArrayAdaptera = new ArrayAdapter<>(CreateSizesScreen.this, android.R.layout.simple_list_item_1, allsize);
         sizeAutoCompleteTextView.setAdapter(sizeArrayAdaptera);
     }
 }

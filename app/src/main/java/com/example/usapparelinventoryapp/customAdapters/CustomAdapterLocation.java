@@ -1,4 +1,4 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.customAdapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,11 +9,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.usapparelinventoryapp.R;
+import com.example.usapparelinventoryapp.models.LocationModel;
+
 import java.util.ArrayList;
 
-public class CustomArrayAdapterLocation extends ArrayAdapter<LocationModel>{
+public class CustomAdapterLocation extends ArrayAdapter<LocationModel>{
 
-    public  CustomArrayAdapterLocation(Context context, ArrayList<LocationModel> locationModels){
+    public CustomAdapterLocation(Context context, ArrayList<LocationModel> locationModels){
 
         super(context, 0, locationModels);
     }
@@ -37,7 +40,7 @@ public class CustomArrayAdapterLocation extends ArrayAdapter<LocationModel>{
 //    Context mContext;
 //    Activity mActivity;
 //
-//    public CustomArrayAdapterLocation(@NonNull Context context, List<LocationModel> alllocationlv) {
+//    public CustomAdapterLocation(@NonNull Context context, List<LocationModel> alllocationlv) {
 //        super(context, R.layout.custom_location_adapter, alllocationlv);
 //    }
 
@@ -48,7 +51,7 @@ public class CustomArrayAdapterLocation extends ArrayAdapter<LocationModel>{
 //
 //    }
 //
-//    public CustomArrayAdapterLocation(ArrayList<LocationModel> data, Context context) {
+//    public CustomAdapterLocation(ArrayList<LocationModel> data, Context context) {
 //        super(context, R.layout.custom_location_adapter, data);
 //        this.dataSet = data;
 //        this.mContext=context;

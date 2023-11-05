@@ -1,4 +1,4 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.models;
 
 import java.util.List;
 import java.util.Objects;

@@ -1,4 +1,4 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,11 +14,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.usapparelinventoryapp.customAdapters.CustomerAdapterStyle;
+import com.example.usapparelinventoryapp.dataBase.DataBaseHelper;
+import com.example.usapparelinventoryapp.R;
+import com.example.usapparelinventoryapp.models.StyleModel;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class MainActivity4 extends AppCompatActivity {
+public class CreateStylesScreen extends AppCompatActivity {
     Button btn_create;
     AutoCompleteTextView styleAutoCompleteTextView ;
     ListView lv_styleLista;
@@ -27,7 +31,7 @@ public class MainActivity4 extends AppCompatActivity {
     ArrayAdapter styleArrayAdapter;
     ArrayAdapter styleArrayAdaptera;
     //
-    DAO databaseHelper;
+    DataBaseHelper databaseHelper;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -39,7 +43,7 @@ public class MainActivity4 extends AppCompatActivity {
         btn_create = findViewById(R.id.btn_create);
 //        btn_search = findViewById(R.id.btn_search);
         lv_styleLista = findViewById(R.id.lv_styleLista);
-        databaseHelper = new DAO( MainActivity4.this);
+        databaseHelper = new DataBaseHelper( CreateStylesScreen.this);
         allstyle = databaseHelper.getAllStylesA();
         ShowStylesOnListView(databaseHelper);
         ShowStylesAuto(databaseHelper);
@@ -60,14 +64,14 @@ public class MainActivity4 extends AppCompatActivity {
 
             try {
                 styleModel = new StyleModel(lv_styleLista.getCount() + 1 , styleAutoCompleteTextView.getText().toString());
-                Toast.makeText(MainActivity4.this, styleModel.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateStylesScreen.this, styleModel.toString(), Toast.LENGTH_SHORT).show();
             }
             catch (Exception e) {
-                Toast.makeText(MainActivity4.this, "Error creating size", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateStylesScreen.this, "Error creating size", Toast.LENGTH_SHORT).show();
                 styleModel = new StyleModel(-1, "error");
             }
 
-            DAO dataBaseHelper = new DAO(MainActivity4.this);
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(CreateStylesScreen.this);
 
             boolean success = dataBaseHelper.addStyle(styleModel);
 
@@ -84,7 +88,7 @@ public class MainActivity4 extends AppCompatActivity {
 
                 StyleModel finalSelectedLocation = selectedLocation;
                 String finalSelectedLocation1 = selectedLocation.getStyle();
-                new AlertDialog.Builder(MainActivity4.this)
+                new AlertDialog.Builder(CreateStylesScreen.this)
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Are you sure ?")
                         .setMessage("Do you want to delete this style")
@@ -93,7 +97,7 @@ public class MainActivity4 extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                                 databaseHelper.deleteStyle(finalSelectedLocation);
-                                Toast.makeText(MainActivity4.this,  "Style "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CreateStylesScreen.this,  "Style "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
                                 ShowStylesOnListView(databaseHelper);
                             }
                         })
@@ -107,7 +111,7 @@ public class MainActivity4 extends AppCompatActivity {
     }
 
     private String styleChecker(String style) {
-//        Toast.makeText(MainActivity.this, style + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(CreatePalletScreen.this, style + "", Toast.LENGTH_SHORT).show();
 
 //        Toast.makeText(this,  databaseHelper.getAllStyles().get(0).getStyle() + "", Toast.LENGTH_SHORT).show();
         List<String> styleList = new ArrayList<>();
@@ -126,14 +130,14 @@ public class MainActivity4 extends AppCompatActivity {
         }
         return style;
     }
-    private void ShowStylesOnListView(DAO dataBaseHelper) {
+    private void ShowStylesOnListView(DataBaseHelper dataBaseHelper) {
 
-        CustomerAdapterStyle  customerAdapterStyle = new CustomerAdapterStyle(getApplicationContext(), (ArrayList<StyleModel>) dataBaseHelper.getAllStyles());
+        CustomerAdapterStyle customerAdapterStyle = new CustomerAdapterStyle(getApplicationContext(), (ArrayList<StyleModel>) dataBaseHelper.getAllStyles());
 
         lv_styleLista.setAdapter(customerAdapterStyle);
     }
-    private void ShowStylesAuto(DAO databaseHelper) {
-        styleArrayAdaptera = new ArrayAdapter<>(MainActivity4.this, android.R.layout.simple_list_item_1, allstyle);
+    private void ShowStylesAuto(DataBaseHelper databaseHelper) {
+        styleArrayAdaptera = new ArrayAdapter<>(CreateStylesScreen.this, android.R.layout.simple_list_item_1, allstyle);
         styleAutoCompleteTextView.setAdapter(styleArrayAdaptera);
 
     }

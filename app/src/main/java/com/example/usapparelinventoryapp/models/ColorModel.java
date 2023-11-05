@@ -1,4 +1,4 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.models;
 
 public class ColorModel {
     private int color_id;

@@ -1,9 +1,8 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,13 +14,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.usapparelinventoryapp.customAdapters.CustomAdapterLocation;
+import com.example.usapparelinventoryapp.dataBase.DataBaseHelper;
+import com.example.usapparelinventoryapp.models.LocationModel;
+import com.example.usapparelinventoryapp.R;
 import com.example.usapparelinventoryapp.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class MainActivity5 extends AppCompatActivity {
+public class CreateLocationsScreen extends AppCompatActivity {
     ActivityMainBinding binding;
 
     Button btn_create, btn_search;
@@ -29,10 +31,10 @@ public class MainActivity5 extends AppCompatActivity {
     ListView lv_locationLista;
     private ArrayList<String> alllocation;
     private List<LocationModel> alllocationlv;
-//    private static  CustomArrayAdapterLocation<LocationModel> CLA_adapter;
+//    private static  CustomAdapterLocation<LocationModel> CLA_adapter;
     ArrayAdapter locationArrayAdapter;
     ArrayAdapter locationArrayAdaptera;
-    DAO databaseHelper;
+    DataBaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class MainActivity5 extends AppCompatActivity {
         btn_create = findViewById(R.id.btn_create_location);
         btn_search = findViewById(R.id.btn_search);
         lv_locationLista = findViewById(R.id.lv_locationLista);
-        databaseHelper = new DAO( MainActivity5.this);
+        databaseHelper = new DataBaseHelper( CreateLocationsScreen.this);
         alllocation = databaseHelper.getAllLocationsA();
         alllocationlv = databaseHelper.getAllLocations();
         ShowLocationsOnListView(databaseHelper);
@@ -98,14 +100,14 @@ public class MainActivity5 extends AppCompatActivity {
 
             try {
                 locationModel = new LocationModel(lv_locationLista.getCount() + 1 , locationAutoCompleteTextView.getText().toString());
-                Toast.makeText(MainActivity5.this, "Location '" + locationModel.getLocation() + "' Created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateLocationsScreen.this, "Location '" + locationModel.getLocation() + "' Created", Toast.LENGTH_SHORT).show();
             }
             catch (Exception e) {
-                Toast.makeText(MainActivity5.this, "Error creating location", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateLocationsScreen.this, "Error creating location", Toast.LENGTH_SHORT).show();
                 locationModel = new LocationModel(-1, "error");
             }
 
-            DAO dataBaseHelper = new DAO(MainActivity5.this);
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(CreateLocationsScreen.this);
 
             boolean success = dataBaseHelper.addLocation(locationModel);
 
@@ -130,7 +132,7 @@ public class MainActivity5 extends AppCompatActivity {
 //                String text = String.valueOf(alllocationlv.get(position).getLocation_id());
                 String text2 = String.valueOf(databaseHelper.getAllLocations().get(position).getLocation());
 
-                Intent i = new Intent(MainActivity5.this,MainActivity9.class);
+                Intent i = new Intent(CreateLocationsScreen.this, PalletViewScreen.class);
 
                 i.putExtra("location",text2.toString());
 
@@ -144,21 +146,21 @@ public class MainActivity5 extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 LocationModel selectedLocation = (LocationModel) lv_locationLista.getItemAtPosition(position);
-//                Toast.makeText(MainActivity5.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
 //
 //                StringBuilder sb = new StringBuilder(selectedLocation);
 //                sb.delete(10, sb.length()-1);
-//                Toast.makeText(MainActivity5.this, sb.length() + "", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CreateLocationsScreen.this, sb.length() + "", Toast.LENGTH_SHORT).show();
 ////                sb.deleteCharAt(9);
 //
 //                selectedLocation = sb.toString();
-//                Toast.makeText(MainActivity5.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
 
 
 
                 LocationModel finalSelectedLocation = selectedLocation;
                 String finalSelectedLocation1 = selectedLocation.getLocation();
-                new AlertDialog.Builder(MainActivity5.this)
+                new AlertDialog.Builder(CreateLocationsScreen.this)
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Are you sure ?")
                         .setMessage("Do you want to delete this location")
@@ -167,7 +169,7 @@ public class MainActivity5 extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                                 databaseHelper.deletelocation(finalSelectedLocation);
-                                Toast.makeText(MainActivity5.this,  "Location "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CreateLocationsScreen.this,  "Location "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
                                 ShowLocationsOnListView(databaseHelper);
                             }
                         })
@@ -230,7 +232,7 @@ public class MainActivity5 extends AppCompatActivity {
         }
     }
 
-    private void ShowLocationsOnListView(DAO dataBaseHelper ) {
+    private void ShowLocationsOnListView(DataBaseHelper dataBaseHelper ) {
 
 //        ArrayList  ListViewConverter = new ArrayList<>();
 //        for (int i = 0; i< dataBaseHelper.getAllLocations().size(); i++){
@@ -249,17 +251,17 @@ public class MainActivity5 extends AppCompatActivity {
 //            ListViewConverter.add(fullLine1.getLocation());
 //
 //        }
-        CustomArrayAdapterLocation  customArrayAdapterLocation = new CustomArrayAdapterLocation(getApplicationContext(), (ArrayList<LocationModel>) dataBaseHelper.getAllLocations());
+        CustomAdapterLocation customAdapterLocation = new CustomAdapterLocation(getApplicationContext(), (ArrayList<LocationModel>) dataBaseHelper.getAllLocations());
 
 
 
 
 
-//        CustomArrayAdapterLocation customArrayAdapterLocation = new CustomArrayAdapterLocation<LocationModel>(MainActivity5.this,ret);
-        lv_locationLista.setAdapter(customArrayAdapterLocation);
+//        CustomAdapterLocation customAdapterLocation = new CustomAdapterLocation<LocationModel>(CreateLocationsScreen.this,ret);
+        lv_locationLista.setAdapter(customAdapterLocation);
     }
-    private void ShowLocationAuto(DAO databaseHelper) {
-        locationArrayAdaptera = new ArrayAdapter<>(MainActivity5.this, android.R.layout.simple_list_item_1, alllocation);
+    private void ShowLocationAuto(DataBaseHelper databaseHelper) {
+        locationArrayAdaptera = new ArrayAdapter<>(CreateLocationsScreen.this, android.R.layout.simple_list_item_1, alllocation);
         locationAutoCompleteTextView.setAdapter(locationArrayAdaptera);
 
     }

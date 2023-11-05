@@ -1,4 +1,4 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.dto;
 
 public class StyleSearchByLocationDTO {
 

@@ -1,4 +1,4 @@
-package com.example.usapparelinventoryapp;
+package com.example.usapparelinventoryapp.screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,11 +14,15 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.usapparelinventoryapp.models.ColorModel;
+import com.example.usapparelinventoryapp.customAdapters.CustomAdapterColor;
+import com.example.usapparelinventoryapp.dataBase.DataBaseHelper;
+import com.example.usapparelinventoryapp.R;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class MainActivity6 extends AppCompatActivity {
+public class CreateColorsScreen extends AppCompatActivity {
 
     Button btn_create_color;
     AutoCompleteTextView colorAutoCompleteTextView ;
@@ -26,7 +30,7 @@ public class MainActivity6 extends AppCompatActivity {
     private ArrayList<String> allcolor;
     ArrayAdapter colorArrayAdapter;
     ArrayAdapter colorArrayAdaptera;
-    DAO databaseHelper;
+    DataBaseHelper databaseHelper;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -38,7 +42,7 @@ public class MainActivity6 extends AppCompatActivity {
         btn_create_color = findViewById(R.id.btn_create_color);
 //        btn_search = findViewById(R.id.btn_search);
         lv_colorLista = findViewById(R.id.lv_colorLista);
-        databaseHelper = new DAO( MainActivity6.this);
+        databaseHelper = new DataBaseHelper( CreateColorsScreen.this);
         allcolor = databaseHelper.getAllColorsA();
         ShowColorsOnListView(databaseHelper);
         ShowColorAuto(databaseHelper);
@@ -62,14 +66,14 @@ public class MainActivity6 extends AppCompatActivity {
 
             try {
                 colorModel = new ColorModel(lv_colorLista.getCount() + 1 , colorAutoCompleteTextView.getText().toString());
-                Toast.makeText(MainActivity6.this, colorModel.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateColorsScreen.this, colorModel.toString(), Toast.LENGTH_SHORT).show();
             }
             catch (Exception e) {
-                Toast.makeText(MainActivity6.this, "Error creating color", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateColorsScreen.this, "Error creating color", Toast.LENGTH_SHORT).show();
                 colorModel = new ColorModel(-1, "error");
             }
 
-            DAO dataBaseHelper = new DAO(MainActivity6.this);
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(CreateColorsScreen.this);
 
             boolean success = dataBaseHelper.addColor(colorModel);
 
@@ -84,7 +88,7 @@ public class MainActivity6 extends AppCompatActivity {
 
                 ColorModel finalSelectedLocation = selectedLocation;
                 String finalSelectedLocation1 = selectedLocation.getColor();
-                new AlertDialog.Builder(MainActivity6.this)
+                new AlertDialog.Builder(CreateColorsScreen.this)
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Are you sure ?")
                         .setMessage("Do you want to delete this color")
@@ -93,7 +97,7 @@ public class MainActivity6 extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
                                 databaseHelper.deleteColor(finalSelectedLocation);
-                                Toast.makeText(MainActivity6.this,  "Color "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CreateColorsScreen.this,  "Color "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
                                 ShowColorsOnListView(databaseHelper);
                             }
                         })
@@ -130,13 +134,13 @@ public class MainActivity6 extends AppCompatActivity {
         return color;
     }
 
-    private void ShowColorsOnListView(DAO dataBaseHelper) {
+    private void ShowColorsOnListView(DataBaseHelper dataBaseHelper) {
 
-        CustomAdapterColor  customAdapterColor = new CustomAdapterColor(getApplicationContext(), (ArrayList<ColorModel>) dataBaseHelper.getAllColors());
+        CustomAdapterColor customAdapterColor = new CustomAdapterColor(getApplicationContext(), (ArrayList<ColorModel>) dataBaseHelper.getAllColors());
         lv_colorLista.setAdapter(customAdapterColor);
     }
-    private void ShowColorAuto(DAO databaseHelper) {
-        colorArrayAdaptera = new ArrayAdapter<>(MainActivity6.this, android.R.layout.simple_list_item_1, allcolor);
+    private void ShowColorAuto(DataBaseHelper databaseHelper) {
+        colorArrayAdaptera = new ArrayAdapter<>(CreateColorsScreen.this, android.R.layout.simple_list_item_1, allcolor);
         colorAutoCompleteTextView.setAdapter(colorArrayAdaptera);
 
     }
