@@ -107,7 +107,6 @@ public class PalletViewScreen extends AppCompatActivity {
         btn_add.setOnClickListener(v -> {
             if (allStylesBylocationlv.size() > 0) {
                 int palletId = allStylesBylocationlv.get(0).style_pallet_id;
-//            Toast.makeText(PalletViewScreen.this, palletId + "", Toast.LENGTH_SHORT).show();
             }else{
 
                 Toast.makeText(PalletViewScreen.this, "You can NOT edit styles in locations that have no assigned pallet.", Toast.LENGTH_LONG).show();
@@ -118,51 +117,6 @@ public class PalletViewScreen extends AppCompatActivity {
 
             }
             int palletId = allStylesBylocationlv.get(0).style_pallet_id;
-//        try{
-//            if (style1.getText().toString().equals("") || color1.getText().toString().equals("")) {
-//                Toast.makeText(PalletViewScreen.this,"item1 not ready", Toast.LENGTH_SHORT).show();
-//
-////                    startActivity(new Intent(this, CreatePalletScreen.class));
-//
-//
-//            }else {
-//                try {
-//                    palletModel = new PalletModel(-1, et_palletLocation.getText().toString());
-//                    Toast.makeText(CreatePalletScreen.this, palletModel.toString(), Toast.LENGTH_SHORT).show();
-//
-//
-//
-////                palletModel = new PalletModel(-1, et_palletLocation.getText().toString());
-////                Toast.makeText(CreatePalletScreen.this, palletModel.toString(), Toast.LENGTH_SHORT).show();
-//
-//
-//                }
-//                catch (Exception e) {
-//                    Toast.makeText(CreatePalletScreen.this, "Error creating pallet", Toast.LENGTH_SHORT).show();
-//                    palletModel = new PalletModel(-1, "error");
-//
-//                }
-//
-//                DataBaseHelper dataBaseHelper = new DataBaseHelper(CreatePalletScreen.this);
-//
-//                boolean success = dataBaseHelper.addPallet(palletModel);
-//                ShowPalletsOnListView(dataBaseHelper);
-//
-//            }
-//        } catch (Exception e) {
-//            Toast.makeText(CreatePalletScreen.this, "Error creating pallet yall", Toast.LENGTH_SHORT).show();
-//        }
-
-
-
-
-//                palletModel = new PalletModel(-1, et_palletLocation.getText().toString());
-//                Toast.makeText(CreatePalletScreen.this, palletModel.toString(), Toast.LENGTH_SHORT).show();
-
-
-
-
-
 
             PalletStylesModel palletStylesModel = null;
 
@@ -300,18 +254,6 @@ public class PalletViewScreen extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 StyleSearchByLocationDTO selectedLocation = (StyleSearchByLocationDTO) lv_palletListByLocation.getItemAtPosition(position);
-//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
-//
-//                StringBuilder sb = new StringBuilder(selectedLocation);
-//                sb.delete(10, sb.length()-1);
-//                Toast.makeText(CreateLocationsScreen.this, sb.length() + "", Toast.LENGTH_SHORT).show();
-////                sb.deleteCharAt(9);
-//
-//                selectedLocation = sb.toString();
-//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
-
-
-
                 StyleSearchByLocationDTO finalSelectedLocation = selectedLocation;
                 int finalSelectedLocation1 = selectedLocation.getPallet_styles_id();
                 String finalSelectedLocation2 = selectedLocation.getPallet_location();
@@ -336,14 +278,6 @@ public class PalletViewScreen extends AppCompatActivity {
                 return true;
 
             }
-
-//            @Override
-//            public boolean OnItemLongClick (AdapterView <?> parent,View view, int position, long id) {
-//
-//            }
-
-
-
         });
     }
 
@@ -351,9 +285,6 @@ public class PalletViewScreen extends AppCompatActivity {
 
 
     private String styleChecker(String style) {
-//        Toast.makeText(CreatePalletScreen.this, style + "", Toast.LENGTH_SHORT).show();
-
-//        Toast.makeText(this,  databaseHelper.getAllStyles().get(0).getStyle() + "", Toast.LENGTH_SHORT).show();
         List <String> styleList = new ArrayList<>();
 
         for (int i = 0; i < databaseHelper.getAllStyles().size(); i++) {
@@ -368,14 +299,6 @@ public class PalletViewScreen extends AppCompatActivity {
         if (style.isEmpty()) {
             style = "";
         }
-
-
-
-
-
-
-//        Toast.makeText(this, style + "", Toast.LENGTH_SHORT).show();
-
 
         return style;
     }
@@ -405,16 +328,11 @@ public class PalletViewScreen extends AppCompatActivity {
         if (size.isEmpty()) {
             size = "";
         }
-//            Toast.makeText(this, size + "", Toast.LENGTH_SHORT).show();
 
         return size;
     }
 
     private String colorChecker(String color) {
-//        Toast.makeText(this, style + "", Toast.LENGTH_SHORT).show();
-
-//        Toast.makeText(this,  databaseHelper.getAllColors().get(0).getColor() + "", Toast.LENGTH_SHORT).show();
-
         List <String> colorList = new ArrayList<>();
 
         for (int i = 0; i < databaseHelper.getAllColors().size(); i++) {
@@ -429,7 +347,6 @@ public class PalletViewScreen extends AppCompatActivity {
         if (color.isEmpty()) {
             color = "";
         }
-//        Toast.makeText(this, color + "", Toast.LENGTH_SHORT).show();
 
         return color;
     }
@@ -437,33 +354,8 @@ public class PalletViewScreen extends AppCompatActivity {
 
 //
     private void ShowSearchOnListView(DataBaseHelper dataBaseHelper, String locationId) {
-//        ArrayList  ListViewConverter = new ArrayList<>();
-//        for (int i = 0; i< databaseHelper.getPalletStylesByLocation(locationId).size(); i++){
-//            List<String> styleCode = Collections.singletonList(databaseHelper.getPalletStylesByLocation(locationId).get(i).getStyle_code().toString());
-//            List<String> styleColor = Collections.singletonList(databaseHelper.getPalletStylesByLocation(locationId).get(i).getStyle_color().toString());
-//            List<String> styleSize = Collections.singletonList(databaseHelper.getPalletStylesByLocation(locationId).get(i).getStyle_size().toString());
-//            List<String> quantity = Collections.singletonList(String.valueOf(Collections.singletonList(databaseHelper.getPalletStylesByLocation(locationId).get(i).getQuantity())));
-//            List<String> location = Collections.singletonList(databaseHelper.getPalletStylesByLocation(locationId).get(i).getPallet_location().toString());
-//            List<String> palletId = Collections.singletonList(String.valueOf(Collections.singletonList(databaseHelper.getPalletStylesByLocation(locationId).get(i).getStyle_pallet_id())));
-//
-//            String styleCodelv = String.valueOf(styleCode);
-//            String styleColorlv = String.valueOf(styleColor);
-//            String styleSizelv = String.valueOf(styleSize);
-//            String quantitylv = String.valueOf(quantity);
-//            String locationlv = String.valueOf(location);
-//            String palletIdlv = String.valueOf(palletId);
-//
-//
-//
-//            String fullLine = "Style Code: " + styleCodelv + "\n" + "Style Color: " + styleColorlv + "\n" + "Style Size: " + styleSizelv + "\n" + "Quantity : " + quantitylv + "\n" + "Location : " + locationlv + "\n" + "Pallet-ID : " + palletIdlv + "\n";
-////            String fullLine = line1 + " - " + " LOCATION: " + line2;
-//
-//            ListViewConverter.add(fullLine);
-//
-//        }
         CustomAdapterSearchByLocation customAdapterSearchByLocation = new CustomAdapterSearchByLocation(getApplicationContext(), (ArrayList<StyleSearchByLocationDTO>) dataBaseHelper.getPalletStylesByLocation(locationId));
 
-//        locationSearchArrayAdapter = new ArrayAdapter<StyleSearchByLocationDTO>(PalletViewScreen.this, android.R.layout.simple_list_item_1, dataBaseHelper.getPalletStylesByLocation(locationId));
         lv_palletListByLocation.setAdapter(customAdapterSearchByLocation);
     }
 

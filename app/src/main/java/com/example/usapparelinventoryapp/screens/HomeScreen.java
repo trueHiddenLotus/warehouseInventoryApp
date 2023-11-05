@@ -1,18 +1,12 @@
 package com.example.usapparelinventoryapp.screens;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.usapparelinventoryapp.R;
-import com.example.usapparelinventoryapp.screens.CreateColorsScreen;
-import com.example.usapparelinventoryapp.screens.CreateLocationsScreen;
-import com.example.usapparelinventoryapp.screens.CreatePalletScreen;
-import com.example.usapparelinventoryapp.screens.CreateSizesScreen;
-import com.example.usapparelinventoryapp.screens.CreateStylesScreen;
-import com.example.usapparelinventoryapp.screens.SearchScreen;
 
 public class HomeScreen extends AppCompatActivity {
 

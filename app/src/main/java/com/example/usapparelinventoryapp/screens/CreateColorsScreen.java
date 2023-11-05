@@ -28,7 +28,6 @@ public class CreateColorsScreen extends AppCompatActivity {
     AutoCompleteTextView colorAutoCompleteTextView ;
     ListView lv_colorLista;
     private ArrayList<String> allcolor;
-    ArrayAdapter colorArrayAdapter;
     ArrayAdapter colorArrayAdaptera;
     DataBaseHelper databaseHelper;
 
@@ -111,9 +110,6 @@ public class CreateColorsScreen extends AppCompatActivity {
     }
 
     private String colorChecker(String color) {
-//        Toast.makeText(this, style + "", Toast.LENGTH_SHORT).show();
-
-//        Toast.makeText(this,  databaseHelper.getAllColors().get(0).getColor() + "", Toast.LENGTH_SHORT).show();
 
         List <String> colorList = new ArrayList<>();
 
@@ -129,7 +125,6 @@ public class CreateColorsScreen extends AppCompatActivity {
         if (color.isEmpty()) {
             color = "";
         }
-//        Toast.makeText(this, color + "", Toast.LENGTH_SHORT).show();
 
         return color;
     }

@@ -36,7 +36,6 @@ public class CreatePalletScreen extends AppCompatActivity {
     ListView lv_palletList;
     private ArrayList<String> allsize, alllocation;
     private List<PalletModel> allpallet;
-    ArrayAdapter sizeArrayAdapter;
     ArrayAdapter sizeArrayAdaptera, styleArrayAdaptera, colorArrayAdaptera, locationArrayAdaptera;
 
     DataBaseHelper databaseHelper;
@@ -79,44 +78,25 @@ public class CreatePalletScreen extends AppCompatActivity {
         ShowSizesAuto(databaseHelper);
         ShowLocationsAuto(databaseHelper);
 
-//        ArrayAdapter<String> sizeArrayAdaptera = new ArrayAdapter<>(CreatePalletScreen.this, android.R.layout.simple_list_item_1, allsize);
-//        autoCompleteTextViewa.setAdapter(sizeArrayAdaptera);
+
 
         if (PalletIdChecker()){
-//            Toast.makeText(this, allpallet.size() + "", Toast.LENGTH_SHORT).show();
             Toast.makeText(this, databaseHelper.getSavedPalletID() + "", Toast.LENGTH_SHORT).show();
 
         } else {
-//            Toast.makeText(this, allpallet.get(allpallet.size()-1).getPallet_id() + "", Toast.LENGTH_SHORT).show();
             Toast.makeText(this, databaseHelper.getSavedPalletID() + "", Toast.LENGTH_SHORT).show();
-
         }
-//                Toast.makeText(this, allpallet.isEmpty()+"", Toast.LENGTH_SHORT).show();
-//                           Toast.makeText(this, allpallet.size() +"", Toast.LENGTH_SHORT).show();
 //
         btn_search.setOnClickListener(v -> {
             lv_palletList.smoothScrollToPosition((Integer) lv_palletList.getItemAtPosition(0));
         } );
 
 
-//        new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                PalletModel clickedCustomer = (PalletModel) parent.getItemAtPosition(position);
-//                databaseHelper.deleteOne(clickedCustomer);
-//                ShowPalletsOnListView(databaseHelper);
-//                Toast.makeText(CreatePalletScreen.this, "Deleted ", Toast.LENGTH_SHORT).show();
-//            }w
-//        });
-
-
-
         btn_create.setOnClickListener(v -> {
 
             PalletModel palletModel = null;
             boolean newPallet = false;
-//            styleChecker(style1.getText().toString();
-//            Toast.makeText(this, styleChecker(style1.getText().toString(), Toast.LENGTH_SHORT).show();
+
 
             if(styleChecker(style1.getText().toString()).equals("false") || styleChecker(style2.getText().toString()).equals("false") || styleChecker(style3.getText().toString()).equals("false")|| styleChecker(style4.getText().toString()).equals("false")){
 
@@ -201,17 +181,6 @@ public class CreatePalletScreen extends AppCompatActivity {
             }
 
 
-
-
-//                palletModel = new PalletModel(-1, et_palletLocation.getText().toString());
-//                Toast.makeText(CreatePalletScreen.this, palletModel.toString(), Toast.LENGTH_SHORT).show();
-
-
-
-
-
-
-//            Toast.makeText(this, p +"", Toast.LENGTH_SHORT).show();
             PalletStylesModel palletStylesModel = null;
 
             try {
@@ -241,7 +210,6 @@ public class CreatePalletScreen extends AppCompatActivity {
             try {
 
                 if (style2.getText().toString().equals("") || color2.getText().toString().equals("") || size2.getText().toString().equals("") || quantity2.getText().toString().equals("")) {
-//                    Toast.makeText(CreatePalletScreen.this,"item2 not ready", Toast.LENGTH_SHORT).show();
                 }else {
                     try {
                         palletStylesModel = new PalletStylesModel(-1, databaseHelper.getSavedPalletID(), style2.getText().toString(), color2.getText().toString(), size2.getText().toString(), Integer.parseInt(quantity2.getText().toString()));
@@ -266,7 +234,6 @@ public class CreatePalletScreen extends AppCompatActivity {
             try {
 
                 if (style3.getText().toString().equals("") || color3.getText().toString().equals("") || size3.getText().toString().equals("") || quantity3.getText().toString().equals("")) {
-//                    Toast.makeText(CreatePalletScreen.this,"item3 not ready", Toast.LENGTH_SHORT).show();
                 }else {
                     try {
                         palletStylesModel = new PalletStylesModel(-1, databaseHelper.getSavedPalletID(), style3.getText().toString(), color3.getText().toString(), size3.getText().toString(), Integer.parseInt(quantity3.getText().toString()));
@@ -291,7 +258,6 @@ public class CreatePalletScreen extends AppCompatActivity {
             try {
 
                 if (style4.getText().toString().equals("") || color4.getText().toString().equals("") || size4.getText().toString().equals("") || quantity4.getText().toString().equals("")) {
-//                    Toast.makeText(CreatePalletScreen.this,"item4 not ready", Toast.LENGTH_SHORT).show();
                 }else {
                     try {
                         palletStylesModel = new PalletStylesModel(-1, databaseHelper.getSavedPalletID(), style4.getText().toString(), color4.getText().toString(), size4.getText().toString(), Integer.parseInt(quantity4.getText().toString()));
@@ -325,7 +291,6 @@ public class CreatePalletScreen extends AppCompatActivity {
                     } else {
                         databaseHelper.updatePalletId(databaseHelper.getSavedPalletID() + 1);
                         Toast.makeText(CreatePalletScreen.this, databaseHelper.getSavedPalletID() + "c", Toast.LENGTH_SHORT).show();
-//                databaseHelper.updatePalletId(allpallet.get(allpallet.size()-1).getPallet_id());
                     }
                 } else {
                     return;
@@ -351,15 +316,7 @@ public class CreatePalletScreen extends AppCompatActivity {
                 String text = String.valueOf(databaseHelper.getAllPallets().get(position).getPallet_id());
                 String text2 = String.valueOf(databaseHelper.getAllPallets().get(position).getLocation());
 
-
-
-
                 Intent i = new Intent(CreatePalletScreen.this, PalletViewScreen.class);
-
-//                Toast.makeText(CreateLocationsScreen.this, text + " " + text2, Toast.LENGTH_SHORT).show();
-
-
-
 
                 i.putExtra("location",text2.toString());
 
@@ -369,55 +326,10 @@ public class CreatePalletScreen extends AppCompatActivity {
         });
 
 
-//
-//        lv_palletList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                PalletModel clickedCustomer = (PalletModel) parent.getItemAtPosition(position);
-//                databaseHelper.deleteOne(clickedCustomer);
-//                ShowPalletsOnListView(databaseHelper);
-//                Toast.makeText(CreatePalletScreen.this, "Deleted ", Toast.LENGTH_SHORT).show();
-//            }w
-//        });
-
-//        lv_palletList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                PalletModel selectedLocation = (PalletModel) lv_palletList.getItemAtPosition(position);
-//
-//
-//
-//                PalletModel finalSelectedLocation = selectedLocation;
-//                int finalSelectedLocation1 = selectedLocation.getPallet_id();
-//                new AlertDialog.Builder(CreatePalletScreen.this)
-//                        .setIcon(android.R.drawable.ic_delete)
-//                        .setTitle("Are you sure ?")
-//                        .setMessage("Do you want to delete this pallet?\n(Associated styles will be deleted as well.)")
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int which) {
-//                                databaseHelper.deletePallet(finalSelectedLocation);
-//                                Toast.makeText(CreatePalletScreen.this,  "Pallet "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
-//                                ShowPalletsOnListView(databaseHelper);
-//                            }
-//                        })
-//                        .setNegativeButton("No", null)
-//                        .show();
-//                return true;
-//
-//            }
-//
-//
-//        });
-
     }
 
     private String styleChecker(String style) {
-//        Toast.makeText(CreatePalletScreen.this, style + "", Toast.LENGTH_SHORT).show();
 
-//        Toast.makeText(this,  databaseHelper.getAllStyles().get(0).getStyle() + "", Toast.LENGTH_SHORT).show();
         List <String> styleList = new ArrayList<>();
 
         for (int i = 0; i < databaseHelper.getAllStyles().size(); i++) {
@@ -430,7 +342,6 @@ public class CreatePalletScreen extends AppCompatActivity {
         if (style.isEmpty()) {
             style = "";
         }
-//        Toast.makeText(this, style + "", Toast.LENGTH_SHORT).show();
         return style;
     }
 
@@ -441,9 +352,6 @@ public class CreatePalletScreen extends AppCompatActivity {
 
 
     private String sizeChecker(String size) {
-//        Toast.makeText(this, style + "", Toast.LENGTH_SHORT).show();
-
-//        Toast.makeText(this,  databaseHelper.getAllSizes().get(0).getSize() + "", Toast.LENGTH_SHORT).show();
 
         List <String> sizeList = new ArrayList<>();
 
@@ -459,15 +367,12 @@ public class CreatePalletScreen extends AppCompatActivity {
         if (size.isEmpty()) {
             size = "";
         }
-//            Toast.makeText(this, size + "", Toast.LENGTH_SHORT).show();
 
         return size;
     }
 
     private String colorChecker(String color) {
-//        Toast.makeText(this, style + "", Toast.LENGTH_SHORT).show();
 
-//        Toast.makeText(this,  databaseHelper.getAllColors().get(0).getColor() + "", Toast.LENGTH_SHORT).show();
 
         List <String> colorList = new ArrayList<>();
 
@@ -483,15 +388,11 @@ public class CreatePalletScreen extends AppCompatActivity {
         if (color.isEmpty()) {
             color = "";
         }
-//        Toast.makeText(this, color + "", Toast.LENGTH_SHORT).show();
 
         return color;
     }
 
     private String locationChecker(String location) {
-//        Toast.makeText(this, style + "", Toast.LENGTH_SHORT).show();
-
-//        Toast.makeText(this,  databaseHelper.getAllColors().get(0).getColor() + "", Toast.LENGTH_SHORT).show();
 
         List <String> locationList = new ArrayList<>();
 
@@ -507,7 +408,6 @@ public class CreatePalletScreen extends AppCompatActivity {
         if (location.isEmpty()) {
             location = "";
         }
-//        Toast.makeText(this, color + "", Toast.LENGTH_SHORT).show();
 
         return location;
     }
@@ -518,7 +418,7 @@ public class CreatePalletScreen extends AppCompatActivity {
 
             p = true;
         }
-//        Toast.makeText(this, p+"", Toast.LENGTH_SHORT).show();
+
         return p;
     }
 
@@ -532,41 +432,9 @@ public class CreatePalletScreen extends AppCompatActivity {
         return p;
     }
 
-    private void updatePalletId() {
-        if (PalletIdChecker()){
-            databaseHelper.updatePalletId(databaseHelper.getSavedPalletID());
-            Toast.makeText(CreatePalletScreen.this, databaseHelper.getSavedPalletID() + "a", Toast.LENGTH_SHORT).show();
-        }
-            else if(PalletIdChecker() && IdGreaterThanOne() ){
-                databaseHelper.updatePalletId(databaseHelper.getSavedPalletID()+1);
-            Toast.makeText(CreatePalletScreen.this, databaseHelper.getSavedPalletID() + "b", Toast.LENGTH_SHORT).show();
-            }
-        else {
-            databaseHelper.updatePalletId(databaseHelper.getSavedPalletID()+1);
-            Toast.makeText(CreatePalletScreen.this, databaseHelper.getSavedPalletID() + "c", Toast.LENGTH_SHORT).show();
-//                databaseHelper.updatePalletId(allpallet.get(allpallet.size()-1).getPallet_id());
-        }
-    }
 
     private void ShowPalletsOnListView(DataBaseHelper dataBaseHelper) {
-//        ArrayList  ListViewConverter = new ArrayList<>();
-//        for (int i = 0; i< allpallet.size(); i++){
-//            List<String> pallet_id = Collections.singletonList(String.valueOf(Collections.singletonList(allpallet.get(i).getPallet_id())));
-//
-//            List<String> location = Collections.singletonList(allpallet.get(i).getLocation().toString());
-//            String line1 =String.valueOf(pallet_id);
-//
-//            String line2 = String.valueOf(location);
-//
-////            String fullLine = "    LOCATION: " + line2;
-//            String fullLine = "    " + "Pallet ID: " + line1 + " - " + " LOCATION: " + line2;
-//
-//            ListViewConverter.add(fullLine);
-//
-//        }
 
-
-//        Toast.makeText(this, dataBaseHelper.getAllPallets().get(allpallet.size() -1).getPallet_id()+"", Toast.LENGTH_SHORT).show();
         CustomAdapterPallet customAdapterPallet = new CustomAdapterPallet(getApplicationContext(), (ArrayList<PalletModel>) dataBaseHelper.getAllPallets());
         lv_palletList.setAdapter(customAdapterPallet);
         registerForContextMenu(lv_palletList);
@@ -588,7 +456,6 @@ public class CreatePalletScreen extends AppCompatActivity {
                 break;
 
             case R.id.reassign_id:
-//                PalletModel finalSelectedLocation = (PalletModel) lv_palletList.getItemAtPosition(info.position);
                 try{
                     locationArrayAdaptera = new ArrayAdapter<>(CreatePalletScreen.this, android.R.layout.simple_list_item_1, databaseHelper.getAllLocationsA());
                     AlertDialog.Builder builder = new AlertDialog.Builder(CreatePalletScreen.this);

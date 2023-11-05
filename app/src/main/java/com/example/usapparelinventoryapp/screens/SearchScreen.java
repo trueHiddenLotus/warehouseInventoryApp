@@ -39,18 +39,12 @@ import java.util.Arrays;
 
 public class SearchScreen extends AppCompatActivity {
 
-//    private static final int PERMISSION_REQUEST_CODE = 100;
-
     private static final int STORAGE_PERMISSION_CODE = 100;
     private static final String TAG = "PERMISSION_TAG";
     Button btn_create_search, btn_search;
     AutoCompleteTextView searchAutoCompleteTextView ;
     ListView lv_searchLista;
     private ArrayList<String> allsearch;
-    //
-    ArrayAdapter searchArrayAdapter;
-    ArrayAdapter searchArrayAdaptera;
-    //
     DataBaseHelper databaseHelper;
 
     @SuppressLint("MissingInflatedId")
@@ -61,14 +55,10 @@ public class SearchScreen extends AppCompatActivity {
 
         searchAutoCompleteTextView = findViewById(R.id.searchAutoCompleteTextView);
         btn_create_search = findViewById(R.id.btn_create_search);
-                btn_search = findViewById(R.id.btn_search);
+        btn_search = findViewById(R.id.btn_search);
         lv_searchLista = findViewById(R.id.lv_searchLista);
         databaseHelper = new DataBaseHelper( SearchScreen.this);
         allsearch = databaseHelper.getAllSizesA();
-//        ShowSearchOnListView(databaseHelper, String searchTerm);
-//        ShowSizesAuto(databaseHelper);
-
-
 
 
         btn_search.setOnClickListener(v -> {
@@ -84,14 +74,9 @@ public class SearchScreen extends AppCompatActivity {
 
             String searchTerm = searchAutoCompleteTextView.getText().toString();
 
-
             DataBaseHelper dataBaseHelper = new DataBaseHelper(SearchScreen.this);
 
             dataBaseHelper.getStylesSearch(searchTerm);
-//            databaseHelper.getStylesSearch(searchTerm).add("Style Code", "style_color", "style_size", 0 , "pallet_location");
-
-//            searchArrayAdapter = new ArrayAdapter<StyleSearchDTO>(SearchScreen.this, android.R.layout.simple_list_item_1, dataBaseHelper.getStylesSearch(searchTerm));
-//            lv_searchLista.setAdapter(searchArrayAdapter);
 
             ShowSearchOnListView(dataBaseHelper, searchTerm);
 
@@ -112,21 +97,6 @@ public class SearchScreen extends AppCompatActivity {
 
         final String[] each_item = Arrays.toString(each_item1).split("#");
 
-//                for(int i = 0; i < dataBaseHelper.getStylesSearchcsv(searchTerm).toArray().length; i++){
-//                    final String[] each_item = Arrays.toString(each_item1).split("#");
-//                    final String each_item = dataBaseHelper.getStylesSearchcsv(searchTerm).toString();
-
-
-
-//                    System.out.println("Splited # ID: "+ each_item[0]);
-//                    System.out.println("Splited # Firstname? : "+ each_item[1]);
-//                    System.out.println("Splited # Lastname? : "+ each_item[2]);
-//                    System.out.println("Splited # Phone ? : "+ each_item[3]);
-
-//                     then add each user data in data string builder
-//                    data.append("\n "+ Arrays.toString(each_item));
-
-//                }
         data.append("\n"+ Arrays.toString(each_item));
 
         int last = data.length() - 3;
@@ -149,13 +119,6 @@ public class SearchScreen extends AppCompatActivity {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             time = calendar.getTimeInMillis();
         }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//            getIntent().addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            Uri path = FileProvider.getUriForFile(this,getApplicationContext().getPackageName() +  ".FileProvider", new File(filePath + fileName));
-//
-//        } else{
-//            Uri path =Uri.fromFile(new File(filePath + fileName))
-//        }
 
         try {
             //
@@ -174,9 +137,6 @@ public class SearchScreen extends AppCompatActivity {
 
             File file = new File(context.getFilesDir(),"CSV_Data_"+time+".csv");
 
-//            getIntent().addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//            Uri path = FileProvider.getUriForFile(this,getApplicationContext().getPackageName() +  ".Environment.DIRECTORY_DOCUMENTS", file);
-
             Uri path = FileProvider.getUriForFile(context,"com.example.usapparelinventoryapp",file);
 
             //once the file is ready a share option will pop up using which you can share
@@ -192,25 +152,6 @@ public class SearchScreen extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-//     checking permission To WRITE
-//    private boolean checkPermission() {
-//        int result = ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//        if (result == PackageManager.PERMISSION_GRANTED) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-
-    // request permission for WRITE Access
-//    private void requestPermission() {
-//        if (ActivityCompat.shouldShowRequestPermissionRationale(SearchScreen.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-//            Toast.makeText(SearchScreen.this, "Write External Storage permission allows us to save files. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
-//        } else {
-//            ActivityCompat.requestPermissions(SearchScreen.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_CODE);
-//        }
-//    }
     private void requestPermission(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
 
@@ -294,50 +235,10 @@ public class SearchScreen extends AppCompatActivity {
         }
     }
 
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case PERMISSION_REQUEST_CODE:
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    Log.e("value", "Permission Granted, Now you can use local drive .");
-//                } else {
-//                    Log.e("value", "Permission Denied, You cannot use local drive .");
-//                }
-//                break;
-//        }
-//    }
-
     private void ShowSearchOnListView(DataBaseHelper dataBaseHelper, String searchTerm) {
-//        ArrayList  ListViewConverter = new ArrayList<>();
-//        for (int i = 0; i< databaseHelper.getStylesSearch(searchTerm).size(); i++){
-//            List<String> styleCode = Collections.singletonList(databaseHelper.getStylesSearch(searchTerm).get(i).getStyle_code().toString());
-//            List<String> styleColor = Collections.singletonList(databaseHelper.getStylesSearch(searchTerm).get(i).getStyle_color().toString());
-//            List<String> styleSize = Collections.singletonList(databaseHelper.getStylesSearch(searchTerm).get(i).getStyle_size().toString());
-//            List<String> quantity = Collections.singletonList(String.valueOf(Collections.singletonList(databaseHelper.getStylesSearch(searchTerm).get(i).getQuantity())));
-//            List<String> location = Collections.singletonList(databaseHelper.getStylesSearch(searchTerm).get(i).getPallet_location().toString());
-//
-//            String styleCodelv =String.valueOf(styleCode);
-//            String styleColorlv = String.valueOf(styleColor);
-//            String styleSizelv = String.valueOf(styleSize);
-//            String quantitylv = String.valueOf(quantity);
-//            String locationlv = String.valueOf(location);
-//
-//
-//            String fullLine = "Style Code: " + styleCodelv + "\n" + "Style Color: " + styleColorlv + "\n" + "Style Size: " + styleSizelv + "\n" + "Quantity : " + quantitylv + "\n" + "Location : " + locationlv + "\n";
-////            String fullLine = line1 + " - " + " LOCATION: " + line2;
-//
-//            ListViewConverter.add(fullLine);
-//
-//        }
+
         CustomAdapterSearch customAdapterSearch = new CustomAdapterSearch(getApplicationContext(), (ArrayList<StyleSearchDTO>) dataBaseHelper.getStylesSearch(searchTerm));
-//        searchArrayAdapter = new ArrayAdapter<StyleSearchDTO>(SearchScreen.this, android.R.layout.simple_list_item_1, ListViewConverter);
         lv_searchLista.setAdapter(customAdapterSearch);
     }
-//    private void ShowSizesAuto(DataBaseHelper databaseHelper) {
-//        sizeArrayAdaptera = new ArrayAdapter<>(CreateSizesScreen.this, android.R.layout.simple_list_item_1, allsize);
-//        sizeAutoCompleteTextView.setAdapter(sizeArrayAdaptera);
-//    }
 
 }

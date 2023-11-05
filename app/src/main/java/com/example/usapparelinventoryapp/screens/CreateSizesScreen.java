@@ -28,8 +28,6 @@ public class CreateSizesScreen extends AppCompatActivity {
     AutoCompleteTextView sizeAutoCompleteTextView ;
     ListView lv_sizeLista;
     private ArrayList<String> allsize;
-    //
-    ArrayAdapter sizeArrayAdapter;
     ArrayAdapter sizeArrayAdaptera;
     //
     DataBaseHelper databaseHelper;
@@ -42,7 +40,6 @@ public class CreateSizesScreen extends AppCompatActivity {
 
         sizeAutoCompleteTextView = findViewById(R.id.sizeAutoCompleteTextView);
         btn_create_size = findViewById(R.id.btn_create_size);
-        //        btn_search = findViewById(R.id.btn_search);
         lv_sizeLista = findViewById(R.id.lv_sizeLista);
         databaseHelper = new DataBaseHelper( CreateSizesScreen.this);
         allsize = databaseHelper.getAllSizesA();
@@ -88,18 +85,6 @@ public class CreateSizesScreen extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 SizeModel selectedLocation = (SizeModel) lv_sizeLista.getItemAtPosition(position);
-//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
-//
-//                StringBuilder sb = new StringBuilder(selectedLocation);
-//                sb.delete(10, sb.length()-1);
-//                Toast.makeText(CreateLocationsScreen.this, sb.length() + "", Toast.LENGTH_SHORT).show();
-////                sb.deleteCharAt(9);
-//
-//                selectedLocation = sb.toString();
-//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
-
-
-
                 SizeModel finalSelectedLocation = selectedLocation;
                 String finalSelectedLocation1 = selectedLocation.getSize();
                 new AlertDialog.Builder(CreateSizesScreen.this)
@@ -120,14 +105,6 @@ public class CreateSizesScreen extends AppCompatActivity {
                 return true;
 
             }
-
-//            @Override
-//            public boolean OnItemLongClick (AdapterView <?> parent,View view, int position, long id) {
-//
-//            }
-
-
-
         });
 
     }
@@ -152,21 +129,6 @@ public class CreateSizesScreen extends AppCompatActivity {
         return size;
     }
     private void ShowSizesOnListView(DataBaseHelper dataBaseHelper) {
-//        ArrayList  ListViewConverter = new ArrayList<>();
-//        for (int i = 0; i< dataBaseHelper.getAllSizes().size(); i++){
-////            List<String> location_id = Collections.singletonList(String.valueOf(Collections.singletonList(alllocationlv.get(i).getLocation_id())));
-//
-//            List<String> size = Collections.singletonList(dataBaseHelper.getAllSizes().get(i).getSize().toString());
-////            String line1 =String.valueOf(location_id);
-//
-//            String line2 = String.valueOf(size);
-//
-//            String fullLine = "           Size: " + line2;
-////            String fullLine = line1 + " - " + " LOCATION: " + line2;
-//
-//            ListViewConverter.add(fullLine);
-//
-//        }
         CustomAdapterSize customAdapterSize = new CustomAdapterSize(getApplicationContext(), (ArrayList<SizeModel>) dataBaseHelper.getAllSizes());
         lv_sizeLista.setAdapter(customAdapterSize);
     }

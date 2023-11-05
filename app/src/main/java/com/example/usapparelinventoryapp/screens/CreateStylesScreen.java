@@ -27,8 +27,6 @@ public class CreateStylesScreen extends AppCompatActivity {
     AutoCompleteTextView styleAutoCompleteTextView ;
     ListView lv_styleLista;
     private ArrayList<String> allstyle;
-    //
-    ArrayAdapter styleArrayAdapter;
     ArrayAdapter styleArrayAdaptera;
     //
     DataBaseHelper databaseHelper;
@@ -41,7 +39,6 @@ public class CreateStylesScreen extends AppCompatActivity {
 
         styleAutoCompleteTextView = findViewById(R.id.styleAutoCompleteTextView);
         btn_create = findViewById(R.id.btn_create);
-//        btn_search = findViewById(R.id.btn_search);
         lv_styleLista = findViewById(R.id.lv_styleLista);
         databaseHelper = new DataBaseHelper( CreateStylesScreen.this);
         allstyle = databaseHelper.getAllStylesA();
@@ -111,9 +108,6 @@ public class CreateStylesScreen extends AppCompatActivity {
     }
 
     private String styleChecker(String style) {
-//        Toast.makeText(CreatePalletScreen.this, style + "", Toast.LENGTH_SHORT).show();
-
-//        Toast.makeText(this,  databaseHelper.getAllStyles().get(0).getStyle() + "", Toast.LENGTH_SHORT).show();
         List<String> styleList = new ArrayList<>();
 
         for (int i = 0; i < databaseHelper.getAllStyles().size(); i++) {

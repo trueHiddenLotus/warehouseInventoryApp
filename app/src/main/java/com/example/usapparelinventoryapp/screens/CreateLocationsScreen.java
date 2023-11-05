@@ -31,8 +31,6 @@ public class CreateLocationsScreen extends AppCompatActivity {
     ListView lv_locationLista;
     private ArrayList<String> alllocation;
     private List<LocationModel> alllocationlv;
-//    private static  CustomAdapterLocation<LocationModel> CLA_adapter;
-    ArrayAdapter locationArrayAdapter;
     ArrayAdapter locationArrayAdaptera;
     DataBaseHelper databaseHelper;
 
@@ -41,8 +39,6 @@ public class CreateLocationsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main5);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        setContentView(binding.getRoot());
-
         locationAutoCompleteTextView = findViewById(R.id.locationAutoCompleteTextView);
         btn_create = findViewById(R.id.btn_create_location);
         btn_search = findViewById(R.id.btn_search);
@@ -129,7 +125,6 @@ public class CreateLocationsScreen extends AppCompatActivity {
             }
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                String text = String.valueOf(alllocationlv.get(position).getLocation_id());
                 String text2 = String.valueOf(databaseHelper.getAllLocations().get(position).getLocation());
 
                 Intent i = new Intent(CreateLocationsScreen.this, PalletViewScreen.class);
@@ -146,17 +141,6 @@ public class CreateLocationsScreen extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 LocationModel selectedLocation = (LocationModel) lv_locationLista.getItemAtPosition(position);
-//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
-//
-//                StringBuilder sb = new StringBuilder(selectedLocation);
-//                sb.delete(10, sb.length()-1);
-//                Toast.makeText(CreateLocationsScreen.this, sb.length() + "", Toast.LENGTH_SHORT).show();
-////                sb.deleteCharAt(9);
-//
-//                selectedLocation = sb.toString();
-//                Toast.makeText(CreateLocationsScreen.this, selectedLocation + "", Toast.LENGTH_SHORT).show();
-
-
 
                 LocationModel finalSelectedLocation = selectedLocation;
                 String finalSelectedLocation1 = selectedLocation.getLocation();
@@ -179,22 +163,12 @@ public class CreateLocationsScreen extends AppCompatActivity {
 
             }
 
-//            @Override
-//            public boolean OnItemLongClick (AdapterView <?> parent,View view, int position, long id) {
-//
-//            }
-
-
-
         });
 
 
     }
 
     private String locationChecker(String location) {
-//        Toast.makeText(this, style + "", Toast.LENGTH_SHORT).show();
-
-//        Toast.makeText(this,  databaseHelper.getAllColors().get(0).getColor() + "", Toast.LENGTH_SHORT).show();
 
         List <String> locationList = new ArrayList<>();
 
@@ -210,7 +184,6 @@ public class CreateLocationsScreen extends AppCompatActivity {
         if (location.isEmpty()) {
             location = "";
         }
-//        Toast.makeText(this, color + "", Toast.LENGTH_SHORT).show();
 
         return location;
     }
@@ -233,33 +206,10 @@ public class CreateLocationsScreen extends AppCompatActivity {
     }
 
     private void ShowLocationsOnListView(DataBaseHelper dataBaseHelper ) {
-
-//        ArrayList  ListViewConverter = new ArrayList<>();
-//        for (int i = 0; i< dataBaseHelper.getAllLocations().size(); i++){
-//            int location_id = alllocationlv.get(i).getLocation_id();
-//
-//            String location = dataBaseHelper.getAllLocations().get(i).getLocation().toString();
-//            int line1 = Integer.parseInt(String.valueOf(location_id));
-//
-//            String line2 = location;
-//
-//            LocationModel fullLine1 = new LocationModel(line1, line2);
-//
-//            String fullLine = "    ID: " + line1 + " - LOCATION: " + line2;
-////            String fullLine = line1 + " - " + " LOCATION: " + line2;
-//
-//            ListViewConverter.add(fullLine1.getLocation());
-//
-//        }
         CustomAdapterLocation customAdapterLocation = new CustomAdapterLocation(getApplicationContext(), (ArrayList<LocationModel>) dataBaseHelper.getAllLocations());
-
-
-
-
-
-//        CustomAdapterLocation customAdapterLocation = new CustomAdapterLocation<LocationModel>(CreateLocationsScreen.this,ret);
         lv_locationLista.setAdapter(customAdapterLocation);
     }
+
     private void ShowLocationAuto(DataBaseHelper databaseHelper) {
         locationArrayAdaptera = new ArrayAdapter<>(CreateLocationsScreen.this, android.R.layout.simple_list_item_1, alllocation);
         locationAutoCompleteTextView.setAdapter(locationArrayAdaptera);
