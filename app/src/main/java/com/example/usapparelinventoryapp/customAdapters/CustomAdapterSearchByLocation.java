@@ -35,6 +35,10 @@ public class CustomAdapterSearchByLocation extends ArrayAdapter<StyleSearchByLoc
         TextView Quantity = convertView.findViewById(R.id.CAStyAByLoc_quantity);
         TextView Location = convertView.findViewById(R.id.CAStyAByLoc_location);
         TextView palletId = convertView.findViewById(R.id.CAStyAByLoc_pallet_id);
+        TextView stylePo = convertView.findViewById(R.id.CAStyAByLoc_po);
+        TextView palletAsn = convertView.findViewById(R.id.CAStyAByLoc_pallet_asn);
+
+
 
 
 
@@ -45,6 +49,8 @@ public class CustomAdapterSearchByLocation extends ArrayAdapter<StyleSearchByLoc
         Quantity.setText((Integer.toString(styleSearchByLocationDTO.getQuantity())));
         Location.setText(styleSearchByLocationDTO.setPallet_location());
         palletId.setText((Integer.toString(styleSearchByLocationDTO.getStyle_pallet_id())));
+        stylePo.setText(Integer.toString(styleSearchByLocationDTO.getStyle_po()));
+        palletAsn.setText(styleSearchByLocationDTO.getPallet_asn());
 
 
 

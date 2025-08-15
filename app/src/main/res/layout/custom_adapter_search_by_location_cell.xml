@@ -203,6 +203,85 @@
         android:layout_centerInParent="true">
 
         <TextView
+            android:id="@+id/CAStyAByLoc_Po"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="1dp"
+            android:text="P.O:" />
+
+        <TextView
+            android:id="@+id/CAStyAByLoc_po"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="1dp"
+            android:text="po" />
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/CAStyAByLoc_Pallet_Asn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="1dp"
+            android:text="Pallet Assignment:" />
+
+        <TextView
+            android:id="@+id/CAStyAByLoc_pallet_asn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="1dp"
+            android:text="asn" />
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <!--//////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
             android:id="@+id/CAStyAByLoc_Pallet_Id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -232,7 +311,13 @@
         </LinearLayout>
 
 
+
     </LinearLayout>
+
+
+
+
+
 
 </LinearLayout>
 

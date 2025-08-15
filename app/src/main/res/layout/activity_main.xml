@@ -8,197 +8,246 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-1dp">
 
-    <AutoCompleteTextView
-        android:id="@+id/size2"
-        android:layout_width="75dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="16dp"
-        android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
-        android:hint="@string/SizeTwo"
-        app:layout_constraintEnd_toStartOf="@+id/quantity1"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+    <!-- Style/Color/Size/Quantity Row 1 -->
 
     <AutoCompleteTextView
-        android:id="@+id/style2"
-        android:layout_width="72dp"
+        android:id="@+id/et_palletLocation"
+        android:layout_width="202dp"
         android:layout_height="39dp"
-        android:layout_marginTop="80dp"
         android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
-        android:hint="@string/StyleTwo"
-        app:layout_constraintEnd_toStartOf="@+id/color1"
-        app:layout_constraintHorizontal_bias="0.737"
+        android:hint="@string/PalletLocation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.77"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
-
-    <AutoCompleteTextView
-        android:id="@+id/style1"
-        android:layout_width="75dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
-        android:hint="@string/StyleOne"
-        app:layout_constraintEnd_toStartOf="@+id/color1"
-        app:layout_constraintHorizontal_bias="0.741"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
-
-    <AutoCompleteTextView
-        android:id="@+id/color1"
-        android:layout_width="73dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="12dp"
-        android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
-        android:hint="@string/ColorOne"
-        app:layout_constraintEnd_toStartOf="@+id/size1"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+        app:layout_constraintTop_toBottomOf="@+id/style4"
+        app:layout_constraintVertical_bias="0.0" />
 
     <AutoCompleteTextView
         android:id="@+id/color2"
-        android:layout_width="77dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
         android:hint="@string/ColorTwo"
-        app:layout_constraintEnd_toStartOf="@+id/size1"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
-
-    <AutoCompleteTextView
-        android:id="@+id/size1"
-        android:layout_width="78dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
-        android:hint="@string/SizeOne"
-        app:layout_constraintEnd_toStartOf="@+id/quantity1"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
-
-    <EditText
-        android:id="@+id/quantity1"
-        android:layout_width="81dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:hint="@string/QuantityOne"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+        app:layout_constraintStart_toEndOf="@+id/style2"
+        app:layout_constraintTop_toBottomOf="@+id/color1" />
 
     <EditText
         android:id="@+id/quantity2"
-        android:layout_width="77dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="24dp"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:hint="@string/QuantityTwo"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+        app:layout_constraintStart_toEndOf="@+id/size2"
+        app:layout_constraintTop_toBottomOf="@+id/quantity1" />
 
     <AutoCompleteTextView
-        android:id="@+id/color3"
-        android:layout_width="78dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="4dp"
+        android:id="@+id/style2"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
         android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
-        android:hint="@string/ColorThree"
-        app:layout_constraintEnd_toStartOf="@+id/size1"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
-
-    <AutoCompleteTextView
-        android:id="@+id/size3"
-        android:layout_width="75dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="16dp"
-        android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
-        android:hint="@string/SizeThree"
-        app:layout_constraintEnd_toStartOf="@+id/quantity1"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
-
-    <EditText
-        android:id="@+id/quantity3"
-        android:layout_width="77dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/QuantityThree"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+        android:hint="@string/StyleTwo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style1" />
 
     <AutoCompleteTextView
         android:id="@+id/style4"
-        android:layout_width="78dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="196dp"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
         android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
         android:hint="@string/StyleFour"
-        app:layout_constraintEnd_toStartOf="@+id/color1"
-        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
-
-    <AutoCompleteTextView
-        android:id="@+id/color4"
-        android:layout_width="78dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="196dp"
-        android:layout_marginEnd="8dp"
-        android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
-        android:hint="@string/ColorFour"
-        app:layout_constraintEnd_toStartOf="@+id/size1"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
-
-    <AutoCompleteTextView
-        android:id="@+id/size4"
-        android:layout_width="74dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="196dp"
-        android:layout_marginEnd="16dp"
-        android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
-        android:hint="@string/SizeFour"
-        app:layout_constraintEnd_toStartOf="@+id/quantity1"
-        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+        app:layout_constraintTop_toBottomOf="@+id/style3" />
 
     <EditText
-        android:id="@+id/quantity4"
-        android:layout_width="77dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="196dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/QuantityFour"
+        android:id="@+id/quantity3"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:hint="@string/QuantityThree"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/size3"
+        app:layout_constraintTop_toBottomOf="@+id/quantity2" />
+
+    <AutoCompleteTextView
+        android:id="@+id/size1"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:completionThreshold="1"
+        android:hint="@string/SizeOne"
+        app:layout_constraintStart_toEndOf="@+id/color1"
         app:layout_constraintTop_toBottomOf="@+id/style_title" />
 
     <AutoCompleteTextView
         android:id="@+id/style3"
-        android:layout_width="75dp"
+        android:layout_width="60dp"
         android:layout_height="40dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
         android:completionThreshold="1"
-        android:dropDownWidth="fill_parent"
         android:hint="@string/StyleThree"
-        app:layout_constraintEnd_toStartOf="@+id/color1"
-        app:layout_constraintHorizontal_bias="0.741"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/style2" />
+
+    <Button
+        android:id="@+id/btn_po2"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:text="P.O(2)"
+        app:layout_constraintBottom_toBottomOf="@+id/quantity2"
+        app:layout_constraintStart_toEndOf="@+id/quantity2"
+        app:layout_constraintTop_toTopOf="@+id/quantity2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <AutoCompleteTextView
+        android:id="@+id/size4"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:completionThreshold="1"
+        android:hint="@string/SizeFour"
+        app:layout_constraintStart_toEndOf="@+id/color4"
+        app:layout_constraintTop_toBottomOf="@+id/size3" />
+
+    <AutoCompleteTextView
+        android:id="@+id/size2"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:completionThreshold="1"
+        android:hint="@string/SizeTwo"
+        app:layout_constraintStart_toEndOf="@+id/color2"
+        app:layout_constraintTop_toBottomOf="@+id/size1" />
+
+    <AutoCompleteTextView
+        android:id="@+id/color4"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:completionThreshold="1"
+        android:hint="@string/ColorFour"
+        app:layout_constraintStart_toEndOf="@+id/style4"
+        app:layout_constraintTop_toBottomOf="@+id/color3" />
+
+    <Button
+        android:id="@+id/btn_po3"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:text="P.O(3)"
+        app:layout_constraintBottom_toBottomOf="@+id/quantity3"
+        app:layout_constraintStart_toEndOf="@+id/quantity3"
+        app:layout_constraintTop_toTopOf="@+id/quantity3"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_po1"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:text="P.O(1)"
+        app:layout_constraintBottom_toBottomOf="@+id/quantity1"
+        app:layout_constraintStart_toEndOf="@+id/quantity1"
+        app:layout_constraintTop_toTopOf="@+id/quantity1"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btn_po4"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:text="P.O(4)"
+        app:layout_constraintBottom_toBottomOf="@+id/quantity4"
+        app:layout_constraintStart_toEndOf="@+id/quantity4"
+        app:layout_constraintTop_toTopOf="@+id/quantity4"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <AutoCompleteTextView
+        android:id="@+id/color3"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:completionThreshold="1"
+        android:hint="@string/ColorThree"
+        app:layout_constraintStart_toEndOf="@+id/style3"
+        app:layout_constraintTop_toBottomOf="@+id/color2" />
+
+    <AutoCompleteTextView
+        android:id="@+id/style1"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:completionThreshold="1"
+        android:hint="@string/StyleOne"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <EditText
+        android:id="@+id/quantity1"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:hint="@string/QuantityOne"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/size1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <AutoCompleteTextView
+        android:id="@+id/size3"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:completionThreshold="1"
+        android:hint="@string/SizeThree"
+        app:layout_constraintStart_toEndOf="@+id/color3"
+        app:layout_constraintTop_toBottomOf="@+id/size2" />
+
+    <EditText
+        android:id="@+id/quantity4"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:hint="@string/QuantityFour"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/size4"
+        app:layout_constraintTop_toBottomOf="@+id/quantity3" />
+
+    <AutoCompleteTextView
+        android:id="@+id/color1"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:completionThreshold="1"
+        android:hint="@string/ColorOne"
+        app:layout_constraintStart_toEndOf="@+id/style1"
+        app:layout_constraintTop_toBottomOf="@+id/style_title" />
+
+    <!-- Row 2 -->
+
+    <!-- Row 3 -->
+
+    <!-- Row 4 -->
 
     <Button
         android:id="@+id/btn_create"
@@ -208,6 +257,7 @@
         android:text="@string/CreateBtn"
         app:layout_constraintBottom_toTopOf="@+id/lv_palletList"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.821"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_addPalletLocation"
         app:layout_constraintVertical_bias="0.0" />
@@ -223,14 +273,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <CheckBox
+        android:id="@+id/rocket_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="ROCKET"
+        app:layout_constraintBottom_toTopOf="@+id/btn_create"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantity4"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <CheckBox
+        android:id="@+id/OA_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="28dp"
+        android:text="OA"
+        app:layout_constraintBottom_toTopOf="@+id/btn_create"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.113"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantity4"
+        app:layout_constraintVertical_bias="0.7" />
+
     <ListView
         android:id="@+id/lv_palletList"
-        android:layout_width="366dp"
-        android:layout_height="246dp"
-        android:layout_marginTop="116dp"
+        android:layout_width="349dp"
+        android:layout_height="273dp"
+        android:layout_marginTop="92dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintHorizontal_bias="0.574"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/size4" />
 
@@ -245,16 +322,19 @@
         app:layout_constraintStart_toEndOf="@+id/style_title"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <AutoCompleteTextView
-        android:id="@+id/et_palletLocation"
-        android:layout_width="323dp"
-        android:layout_height="52dp"
-        android:completionThreshold="1"
-        android:hint="@string/PalletLocation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <EditText
+        android:id="@+id/et_asn"
+        android:layout_width="172dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="ASN"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_create"
+        app:layout_constraintEnd_toStartOf="@+id/btn_create"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/style4"
-        app:layout_constraintVertical_bias="0.026" />
+        app:layout_constraintTop_toBottomOf="@+id/et_palletLocation"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

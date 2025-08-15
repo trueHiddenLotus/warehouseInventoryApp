@@ -8,6 +8,8 @@ public class StyleSearchByLocationDTO {
     public String style_size;
     public int quantity;
     public String pallet_location;
+    public int style_po;
+    public String pallet_asn;
 
 
 
@@ -16,7 +18,7 @@ public class StyleSearchByLocationDTO {
     public StyleSearchByLocationDTO() {
     }
 
-    public StyleSearchByLocationDTO(int style_pallet_id, String style_code, String style_color, String style_size, int quantity, String pallet_location, int pallet_styles_id) {
+    public StyleSearchByLocationDTO(int style_pallet_id, String style_code, String style_color, String style_size, int quantity, String pallet_location, int pallet_styles_id, int style_po, String pallet_asn) {
         this.style_pallet_id = style_pallet_id;
         this.style_code = style_code;
         this.style_color = style_color;
@@ -24,8 +26,11 @@ public class StyleSearchByLocationDTO {
         this.quantity = quantity;
         this.pallet_location = pallet_location;
         this.pallet_styles_id = pallet_styles_id;
+        this.style_po = style_po;
+        this.pallet_asn = pallet_asn;
 
     }
+
 
     public int getStyle_pallet_id() {
         return style_pallet_id;
@@ -88,6 +93,21 @@ public class StyleSearchByLocationDTO {
         this.pallet_styles_id = pallet_styles_id;
     }
 
+    public int getStyle_po() {
+        return style_po;
+    }
+
+    public void setStyle_po(int style_po) {
+        this.style_po = style_po;
+    }
+
+    public String getPallet_asn() {
+        return pallet_asn;
+    }
+
+    public void setPallet_asn(String pallet_asn) {
+        this.pallet_asn = pallet_asn;
+    }
 
     @Override
     public String toString() {
@@ -98,6 +118,8 @@ public class StyleSearchByLocationDTO {
                 ", style_size='" + style_size + '\'' +
                 ", quantity=" + quantity +
                 ", pallet_location='" + pallet_location + '\'' +
+                ", style_po=" + style_po +
+                ", pallet_asn='" + pallet_asn + '\'' +
                 ", pallet_styles_id=" + pallet_styles_id +
                 '}';
     }

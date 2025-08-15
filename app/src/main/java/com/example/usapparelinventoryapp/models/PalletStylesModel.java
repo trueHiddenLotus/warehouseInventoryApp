@@ -9,16 +9,19 @@ public class PalletStylesModel {
     String styleSize;
     int quantity;
 
+    private Integer style_po; // nullable
+
     public PalletStylesModel() {
     }
 
-    public PalletStylesModel(int palletStylesId, int style_pallet_id, String styleCode, String styleColor, String styleSize, int quantity) {
+    public PalletStylesModel(int palletStylesId, int style_pallet_id, String styleCode, String styleColor, String styleSize, int quantity, Integer style_po) {
         this.palletStylesId = palletStylesId;
         this.style_pallet_id = style_pallet_id;
         this.styleCode = styleCode;
         this.styleColor = styleColor;
         this.styleSize = styleSize;
         this.quantity = quantity;
+        this.style_po = style_po;
     }
 
     public int getPalletStylesId() {
@@ -69,6 +72,14 @@ public class PalletStylesModel {
         this.quantity = quantity;
     }
 
+    public Integer getStyle_po() {
+        return style_po;
+    }
+
+    public void setStyle_po(Integer style_po) {
+        this.style_po = style_po;
+    }
+
     @Override
     public String toString() {
         return "PalletStylesModel{" +
@@ -78,6 +89,7 @@ public class PalletStylesModel {
                 ", styleColor='" + styleColor + '\'' +
                 ", styleSize='" + styleSize + '\'' +
                 ", quantity=" + quantity +
+                ", style_po=" + style_po +
                 '}';
     }
 }

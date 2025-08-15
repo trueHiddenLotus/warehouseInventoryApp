@@ -31,10 +31,13 @@ public class CustomAdapterPallet extends ArrayAdapter<PalletModel> {
 
         TextView pallet_Id = convertView.findViewById(R.id.CPalA_pallet_Id);
         TextView palletlocation = convertView.findViewById(R.id.CPalA_location);
+        TextView palletasn = convertView.findViewById(R.id.CPalA_pallet_Asn);
+
 
 
         pallet_Id.setText(Integer.toString(palletModel.setPallet_id()));
         palletlocation.setText(palletModel.setLocation());
+        palletasn.setText(palletModel.setAsnv());
         return  convertView;
     }
 }

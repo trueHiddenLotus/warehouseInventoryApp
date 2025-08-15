@@ -34,6 +34,9 @@ public class CustomAdapterSearch extends ArrayAdapter<StyleSearchDTO> {
         TextView styleSize = convertView.findViewById(R.id.CAStyA_size);
         TextView Quantity = convertView.findViewById(R.id.CAStyA_quantity);
         TextView Location = convertView.findViewById(R.id.CAStyA_location);
+        TextView po = convertView.findViewById(R.id.CAStyA_po);
+        TextView ASN = convertView.findViewById(R.id.CAStyA_pallet_asn);
+        TextView palletId = convertView.findViewById(R.id.CAStyA_pallet_id);
 
 
 
@@ -42,6 +45,10 @@ public class CustomAdapterSearch extends ArrayAdapter<StyleSearchDTO> {
         styleSize.setText(styleSearchDTO.setStyle_size());
         Quantity.setText((Integer.toString(styleSearchDTO.getQuantity())));
         Location.setText(styleSearchDTO.setPallet_location());
+        po.setText(Integer.toString(styleSearchDTO.getStyle_po()));
+        ASN.setText(styleSearchDTO.getPallet_asn());
+        palletId.setText(Integer.toString(styleSearchDTO.getPallet_id()));
+
 
 
 

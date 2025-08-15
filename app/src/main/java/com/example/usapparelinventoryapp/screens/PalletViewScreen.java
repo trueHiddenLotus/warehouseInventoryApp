@@ -9,6 +9,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +33,7 @@ import java.util.List;
 public class PalletViewScreen extends AppCompatActivity {
 
     Button btn_add, btn_search;
-    EditText quantity1, quantity2, quantity3, quantity4;
+    EditText quantity1, quantity2, quantity3, quantity4,stylePo1, stylePo2, stylePo3, stylePo4;
     AutoCompleteTextView style1, style2, style3, style4, size1, size2, size3, size4, color1, color2, color3, color4, et_palletLocation;
     ListView lv_palletListByLocation;
     private ArrayList<String> allsize;
@@ -43,13 +46,16 @@ public class PalletViewScreen extends AppCompatActivity {
 
     DataBaseHelper databaseHelper;
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main9);
 
+        stylePo1 = findViewById(R.id.stylePo1);
+        stylePo2 = findViewById(R.id.stylePo2);
+        stylePo3 = findViewById(R.id.stylePo3);
+        stylePo4 = findViewById(R.id.stylePo4);
         btn_add = findViewById(R.id.btn_add);
         btn_search = findViewById(R.id.btn_search);
         style1 = findViewById(R.id.stylea1);
@@ -70,21 +76,28 @@ public class PalletViewScreen extends AppCompatActivity {
         quantity4 = findViewById(R.id.quantitya4);
         et_palletLocation = findViewById(R.id.et_addPalletLocation);
         lv_palletListByLocation = findViewById(R.id.lv_palletListByLocation);
+        registerForContextMenu(lv_palletListByLocation);
+
         databaseHelper = new DataBaseHelper(PalletViewScreen.this);
         allsize = databaseHelper.getAllSizesA();
         allstyle = databaseHelper.getPalletStylesByLocation(location_id);
 //        allStylesBylocationlv = databaseHelper.getPalletStylesByLocation();
 //        ShowPalletsOnListView(databaseHelper);
+
+
+
         ShowStylesAuto(databaseHelper);
         ShowColorsAuto(databaseHelper);
         ShowSizesAuto(databaseHelper);
 
         Intent intent = this.getIntent();
         String location = null;
+        String asn = null;
 
         if (intent != null) {
 
             location = intent.getStringExtra("location");
+            asn = intent.getStringExtra("asn");
 //            Toast.makeText(PalletViewScreen.this, location + "", Toast.LENGTH_SHORT).show();
 
             allStylesBylocationlv = databaseHelper.getPalletStylesByLocation(location);
@@ -156,12 +169,12 @@ public class PalletViewScreen extends AppCompatActivity {
                     Toast.makeText(PalletViewScreen.this,"item1 not ready", Toast.LENGTH_SHORT).show();
                 }else {
                     try {
-                        palletStylesModel = new PalletStylesModel(-1, palletId, style1.getText().toString(), color1.getText().toString(), size1.getText().toString(), Integer.parseInt(quantity1.getText().toString()));
+                        palletStylesModel = new PalletStylesModel(-1, palletId, style1.getText().toString(), color1.getText().toString(), size1.getText().toString(), Integer.parseInt(quantity1.getText().toString()), stylePo1.getText().toString().isEmpty() ? null : Integer.valueOf(stylePo1.getText().toString()));
                         Toast.makeText(PalletViewScreen.this, palletStylesModel.toString(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e)
                     {
                         Toast.makeText(PalletViewScreen.this, "Error creating pallet", Toast.LENGTH_SHORT).show();
-                        palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0 );
+                        palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0, null );
                     }
                     DataBaseHelper dataBaseHelper1 = new DataBaseHelper(PalletViewScreen.this);
 
@@ -172,7 +185,7 @@ public class PalletViewScreen extends AppCompatActivity {
             }
             catch (Exception e) {
                 Toast.makeText(PalletViewScreen.this, "Error creating pallet", Toast.LENGTH_SHORT).show();
-                palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0 );
+                palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0, null );
             }
 
             try {
@@ -180,12 +193,12 @@ public class PalletViewScreen extends AppCompatActivity {
                     Toast.makeText(PalletViewScreen.this,"item2 not ready", Toast.LENGTH_SHORT).show();
                 }else {
                     try {
-                        palletStylesModel = new PalletStylesModel(-1, palletId, style2.getText().toString(), color2.getText().toString(), size2.getText().toString(), Integer.parseInt(quantity2.getText().toString()));
+                        palletStylesModel = new PalletStylesModel(-1, palletId, style2.getText().toString(), color2.getText().toString(), size2.getText().toString(), Integer.parseInt(quantity2.getText().toString()), stylePo2.getText().toString().isEmpty() ? null : Integer.valueOf(stylePo2.getText().toString()));
                         Toast.makeText(PalletViewScreen.this, palletStylesModel.toString(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e)
                     {
                         Toast.makeText(PalletViewScreen.this, "Error creating pallet", Toast.LENGTH_SHORT).show();
-                        palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0 );
+                        palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0, null );
                     }
                     DataBaseHelper dataBaseHelper1 = new DataBaseHelper(PalletViewScreen.this);
 
@@ -196,7 +209,7 @@ public class PalletViewScreen extends AppCompatActivity {
             }
             catch (Exception e) {
                 Toast.makeText(PalletViewScreen.this, "Error creating pallet", Toast.LENGTH_SHORT).show();
-                palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0 );
+                palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0, null );
             }
 
             try {
@@ -204,12 +217,12 @@ public class PalletViewScreen extends AppCompatActivity {
                     Toast.makeText(PalletViewScreen.this,"item3 not ready", Toast.LENGTH_SHORT).show();
                 }else {
                     try {
-                        palletStylesModel = new PalletStylesModel(-1, palletId, style3.getText().toString(), color3.getText().toString(), size3.getText().toString(), Integer.parseInt(quantity3.getText().toString()));
+                        palletStylesModel = new PalletStylesModel(-1, palletId, style3.getText().toString(), color3.getText().toString(), size3.getText().toString(), Integer.parseInt(quantity3.getText().toString()), stylePo3.getText().toString().isEmpty() ? null : Integer.valueOf(stylePo3.getText().toString()));
                         Toast.makeText(PalletViewScreen.this, palletStylesModel.toString(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e)
                     {
                         Toast.makeText(PalletViewScreen.this, "Error creating pallet", Toast.LENGTH_SHORT).show();
-                        palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0 );
+                        palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0, null);
                     }
                     DataBaseHelper dataBaseHelper1 = new DataBaseHelper(PalletViewScreen.this);
 
@@ -220,7 +233,7 @@ public class PalletViewScreen extends AppCompatActivity {
             }
             catch (Exception e) {
                 Toast.makeText(PalletViewScreen.this, "Error creating pallet", Toast.LENGTH_SHORT).show();
-                palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0 );
+                palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0, null );
             }
 
             try {
@@ -228,12 +241,12 @@ public class PalletViewScreen extends AppCompatActivity {
                     Toast.makeText(PalletViewScreen.this,"item4 not ready", Toast.LENGTH_SHORT).show();
                 }else {
                     try {
-                        palletStylesModel = new PalletStylesModel(-1, palletId, style4.getText().toString(), color4.getText().toString(), size4.getText().toString(), Integer.parseInt(quantity4.getText().toString()));
+                        palletStylesModel = new PalletStylesModel(-1, palletId, style4.getText().toString(), color4.getText().toString(), size4.getText().toString(), Integer.parseInt(quantity4.getText().toString()), stylePo4.getText().toString().isEmpty() ? null : Integer.valueOf(stylePo4.getText().toString()));
                         Toast.makeText(PalletViewScreen.this, palletStylesModel.toString(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e)
                     {
                         Toast.makeText(PalletViewScreen.this, "Error creating pallet", Toast.LENGTH_SHORT).show();
-                        palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0 );
+                        palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0, null );
                     }
                     DataBaseHelper dataBaseHelper1 = new DataBaseHelper(PalletViewScreen.this);
 
@@ -244,41 +257,41 @@ public class PalletViewScreen extends AppCompatActivity {
             }
             catch (Exception e) {
                 Toast.makeText(PalletViewScreen.this, "Error creating pallet", Toast.LENGTH_SHORT).show();
-                palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0 );
+                palletStylesModel = new PalletStylesModel(-1, palletId, "error", "error2", "error3", 0, null );
             }
         });
 
 
-        lv_palletListByLocation.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                StyleSearchByLocationDTO selectedLocation = (StyleSearchByLocationDTO) lv_palletListByLocation.getItemAtPosition(position);
-                StyleSearchByLocationDTO finalSelectedLocation = selectedLocation;
-                int finalSelectedLocation1 = selectedLocation.getPallet_styles_id();
-                String finalSelectedLocation2 = selectedLocation.getPallet_location();
-                new AlertDialog.Builder(PalletViewScreen.this)
-                        .setIcon(android.R.drawable.ic_delete)
-                        .setTitle("Are you sure ?")
-                        .setMessage("Do you want to delete this Style")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int which) {
-                                databaseHelper.deleteStyleFromPallet(finalSelectedLocation);
-                                Toast.makeText(PalletViewScreen.this,  "Style "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
-                                ShowSearchOnListView(databaseHelper,finalSelectedLocation2);
-
-                            }
-
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
-
-                return true;
-
-            }
-        });
+//        lv_palletListByLocation.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                StyleSearchByLocationDTO selectedLocation = (StyleSearchByLocationDTO) lv_palletListByLocation.getItemAtPosition(position);
+//                StyleSearchByLocationDTO finalSelectedLocation = selectedLocation;
+//                int finalSelectedLocation1 = selectedLocation.getPallet_styles_id();
+//                String finalSelectedLocation2 = selectedLocation.getPallet_location();
+//                new AlertDialog.Builder(PalletViewScreen.this)
+//                        .setIcon(android.R.drawable.ic_delete)
+//                        .setTitle("Are you sure ?")
+//                        .setMessage("Do you want to delete this Style")
+//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int which) {
+//                                databaseHelper.deleteStyleFromPallet(finalSelectedLocation);
+//                                Toast.makeText(PalletViewScreen.this,  "Style "+ finalSelectedLocation1 +" Deleted", Toast.LENGTH_SHORT).show();
+//                                ShowSearchOnListView(databaseHelper,finalSelectedLocation2);
+//
+//                            }
+//
+//                        })
+//                        .setNegativeButton("No", null)
+//                        .show();
+//
+//                return true;
+//
+//            }
+//        });
     }
 
 
@@ -358,7 +371,103 @@ public class PalletViewScreen extends AppCompatActivity {
 
         lv_palletListByLocation.setAdapter(customAdapterSearchByLocation);
     }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.palletstyle_context_menu, menu);
+    }
 
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+//        StyleSearchByLocationDTO selectedStyle = (StyleSearchByLocationDTO) lv_palletListByLocation.getItemAtPosition(info.position);
+//
+//        if (item.getItemId() == R.id.edit_pallet_style) {
+//            showEditStyleDialog(selectedStyle);
+//            return true;
+//        }
+//        return super.onContextItemSelected(item);
+//    }
+
+    private void showEditStyleDialog(StyleSearchByLocationDTO style) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Edit Pallet Style");
+
+        View view = getLayoutInflater().inflate(R.layout.dialog_edit_pallet_style, null);
+
+        EditText etStyleCode = view.findViewById(R.id.et_style_code);
+        EditText etStyleColor = view.findViewById(R.id.et_style_color);
+        EditText etStyleSize = view.findViewById(R.id.et_style_size);
+        EditText etQuantity = view.findViewById(R.id.et_quantity);
+        EditText etStylePo = view.findViewById(R.id.et_style_po);
+
+        etStyleCode.setText(style.getStyle_code());
+        etStyleColor.setText(style.getStyle_color());
+        etStyleSize.setText(style.getStyle_size());
+        etQuantity.setText(String.valueOf(style.getQuantity()));
+        etStylePo.setText(style.getStyle_po() == 0 ? "" : String.valueOf(style.getStyle_po()));
+
+        builder.setView(view);
+
+        builder.setPositiveButton("Save", (dialog, which) -> {
+            String newCode = etStyleCode.getText().toString();
+            String newColor = etStyleColor.getText().toString();
+            String newSize = etStyleSize.getText().toString();
+            int newQty = Integer.parseInt(etQuantity.getText().toString());
+            String newPoText = etStylePo.getText().toString();
+            Integer newPo = newPoText.isEmpty() ? null : Integer.parseInt(newPoText);
+
+            if (!style.getStyle_code().equals(newCode)) {
+                databaseHelper.updatePalletStyleField(style.getPallet_styles_id(), "style_code", newCode);
+            }
+            if (!style.getStyle_color().equals(newColor)) {
+                databaseHelper.updatePalletStyleField(style.getPallet_styles_id(), "style_color", newColor);
+            }
+            if (!style.getStyle_size().equals(newSize)) {
+                databaseHelper.updatePalletStyleField(style.getPallet_styles_id(), "style_size", newSize);
+            }
+            if (style.getQuantity() != newQty) {
+                databaseHelper.updatePalletStyleField(style.getPallet_styles_id(), "quantity", String.valueOf(newQty));
+            }
+            if (style.getStyle_po() != newPo) {
+                databaseHelper.updatePalletStyleField(style.getPallet_styles_id(), "style_po", newPo == null ? null : String.valueOf(newPo));
+            }
+
+            ShowSearchOnListView(databaseHelper, style.getPallet_location());
+        });
+
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        StyleSearchByLocationDTO selectedStyle = (StyleSearchByLocationDTO) lv_palletListByLocation.getItemAtPosition(info.position);
+
+        if (item.getItemId() == R.id.edit_pallet_style) {
+            showEditStyleDialog(selectedStyle);
+            return true;
+        }
+
+        if (item.getItemId() == R.id.delete_pallet_style) {
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_delete)
+                    .setTitle("Delete Style")
+                    .setMessage("Do you want to delete this Style?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        databaseHelper.deleteStyleFromPallet(selectedStyle);
+                        Toast.makeText(PalletViewScreen.this, "Style Deleted", Toast.LENGTH_SHORT).show();
+                        ShowSearchOnListView(databaseHelper, selectedStyle.getPallet_location());
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+            return true;
+        }
+
+        return super.onContextItemSelected(item);
+    }
     private void ShowStylesAuto(DataBaseHelper databaseHelper) {
         styleArrayAdaptera = new ArrayAdapter<>(PalletViewScreen.this, android.R.layout.simple_list_item_1, databaseHelper.getAllStylesA());
         style1.setAdapter(styleArrayAdaptera);

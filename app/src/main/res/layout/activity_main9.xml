@@ -214,14 +214,16 @@
 
     <ListView
         android:id="@+id/lv_palletListByLocation"
-        android:layout_width="362dp"
-        android:layout_height="315dp"
+        android:layout_width="352dp"
+        android:layout_height="274dp"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintHorizontal_bias="0.7"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sizea4" />
+        app:layout_constraintTop_toBottomOf="@+id/sizea4"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btn_search"
@@ -233,5 +235,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/add_style_title"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/stylePo1"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:hint="P.O(1)"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/quantitya1"
+        app:layout_constraintTop_toTopOf="@+id/quantitya1" />
+
+    <EditText
+        android:id="@+id/stylePo2"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:hint="P.O(2)"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/quantitya2"
+        app:layout_constraintTop_toTopOf="@+id/quantitya2" />
+
+    <EditText
+        android:id="@+id/stylePo3"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:hint="P.O(3)"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/quantitya3"
+        app:layout_constraintTop_toTopOf="@+id/quantitya3" />
+
+    <EditText
+        android:id="@+id/stylePo4"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:hint="P.O(4)"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/quantitya4"
+        app:layout_constraintTop_toTopOf="@+id/quantitya4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

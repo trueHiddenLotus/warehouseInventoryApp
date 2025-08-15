@@ -15,6 +15,9 @@
         android:id="@+id/delete_pallet"
         android:title="Permanently delete pallet"
         />
+    <item
+        android:id="@+id/update_asn"
+        android:title="Update ASN" />
 
 
 </menu>

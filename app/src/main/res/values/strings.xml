@@ -50,4 +50,5 @@
     <string name="GenerateCSV">Generate CSV</string>
     <string name="addStyle">Add Stye To Pallet</string>
     <string name="AddButton">Add</string>
+    <string name="pallet_asn">ASN:</string>
 </resources>

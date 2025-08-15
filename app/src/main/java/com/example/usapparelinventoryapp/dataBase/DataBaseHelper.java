@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -47,15 +48,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String quantity = "quantity";
     public static final String saved_pallet_id_table = "saved_pallet_id_table";
     public static final String saved_pallet_id = "saved_pallet_id";
+    public static final String pallet_asn = "asn";
+    public static final String style_po = "style_po";
 
     public static final String saved_pallet = "saved_pallet";
     public static final String CHECK = "CHECK";
+    private static final int DATABASE_VERSION = 7; // ← Increment this
 
 
 
 
     public DataBaseHelper(@Nullable Context context) {
-        super(context, "pallets.db", null, 1);
+        super(context, "pallets3.db", null, DATABASE_VERSION);
     }
 
     // this is called the first time a database is accessed. There should be code in here to create a new database.
@@ -76,15 +80,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + color  + " TEXT PRIMARY KEY NOT NULL)";
 
         String createLocationTable = "CREATE TABLE " + location_table + " ("
-                + location_id + " INTEGER NOT NULL, "
+                + location_id + " INTEGER AUTOINCREMENT NOT NULL, "
                 + location  + " TEXT PRIMARY KEY NOT NULL)";
 
         String createPalletTable = "CREATE TABLE " + pallet_table + " ("
                 + pallet_id + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                 + pallet_location + " TEXT  NOT NULL, "
+                + pallet_asn + " TEXT, "
                 + is_removed + " BOOBLEAN DEFAULT (FALSE)  NOT NULL, "
                 + CHECK + " (pallet_location <> ''), "
-                + " CONSTRAINT " + "location_fk" + " FOREIGN KEY " + "( pallet_location )" + " REFERENCES locaton_table ( location ))";
+                + " CONSTRAINT " + "location_fk" + " FOREIGN KEY " + "( pallet_location )" + " REFERENCES location_table ( location ))";
 
         String createLocationIdIndex = "CREATE INDEX " + " pallet_location_id_in " + " ON pallet_table" + " ( pallet_location )";
 
@@ -95,10 +100,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + style_color + " TEXT NOT NULL, "
                 + style_size + " TEXT NOT NULL, "
                 + quantity + " INTEGER NOT NULL, "
+                + style_po  + " INTEGER, "
                 + " CONSTRAINT " + "pallet_styles_color_fk" + " FOREIGN KEY " + "( style_color )" + " REFERENCES color_table ( color ), "
                 + " CONSTRAINT " + "size_fk" + " FOREIGN KEY " + "( style_size )" + " REFERENCES size_table ( size ), "
                 + " CONSTRAINT " + "style_pallet_id" + " FOREIGN KEY " + "( style_pallet_id )" + " REFERENCES pallet_table ( pallet_id ) on delete Cascade, "
-                + " CONSTRAINT " + "style_code_fk" + " FOREIGN KEY " + "( style_code )" + " REFERENCES size_table ( style_code ))";
+                + " CONSTRAINT " + "style_code_fk" + " FOREIGN KEY " + "( style_code )" + " REFERENCES style_table ( style_code ))";
 
         String createSavedPalletIdTable = "CREATE TABLE " + saved_pallet_id_table + " ("
                 + saved_pallet_id + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
@@ -2613,7 +2619,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     // this is called if the database version number changes. It prevents previous user apps from breaking when you change the database design.
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+//       if (oldVersion < 7) {
+            // Add style_po to pallet_styles_table if it doesn't already exist
+//            db.execSQL("ALTER TABLE pallet_styles_table ADD COLUMN style_po INTEGER");
 
+            // Add pallet_asn to pallet_table if it doesn't already exist
+//            db.execSQL("ALTER TABLE pallet_table ADD COLUMN pallet_asn TEXT");
+
+            // Optional: Set default values if needed
+            // db.execSQL("UPDATE pallet_styles_table SET style_po = 0 WHERE style_po IS NULL");
+            // db.execSQL("UPDATE pallet_table SET pallet_asn = '' WHERE pallet_asn IS NULL");
+//        }
+
+        // Future upgrades go here, e.g.:
+        // if (oldVersion < 3) {
+        //     db.execSQL("ALTER TABLE some_table ADD COLUMN another_column TEXT");
+        // }
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public boolean addSize (SizeModel sizeModel) {
@@ -2701,6 +2722,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         cv.put(pallet_location, palletModel.getLocation());
+        cv.put(pallet_asn, palletModel.getAsn());
 
 
         long insert = db.insert(pallet_table, null, cv);
@@ -2718,12 +2740,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        Log.d("SearchDebug", "Search term: " + palletStylesModel);
 
         cv.put(style_pallet_id, palletStylesModel.getStyle_pallet_id());
         cv.put(style_code, palletStylesModel.getStyleCode());
         cv.put(style_color, palletStylesModel.getStyleColor());
         cv.put(style_size, palletStylesModel.getStyleSize());
         cv.put(quantity, palletStylesModel.getQuantity());
+
+        // Insert style_po if it's not null
+        if (palletStylesModel.getStyle_po() != null) {
+            cv.put("style_po", palletStylesModel.getStyle_po());
+        } else {
+            cv.putNull("style_po");
+        }
 
 
         long insert = db.insert(pallet_styles_table, null, cv);
@@ -2743,31 +2773,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         String queryString = "SELECT "
 
-                + style_pallet_id
-                + ", "
-                + style_code
-                + ", "
-                + style_color
-                + ", "
-                + style_size
-                + ", "
-                + quantity
-                + ", "
-                + pallet_location
-                + ", "
-                + pallet_styles_id
-                + " FROM "
-                + pallet_table
-                + " INNER JOIN "
-                + pallet_styles_table
-                + " ON "
-                + pallet_styles_table
-                + ". "
-                + style_pallet_id
-                + " = "
-                + pallet_table
-                + ". "
-                + pallet_id
+                + style_pallet_id + ", "
+                + style_code + ", "
+                + style_color + ", "
+                + style_size + ", "
+                + quantity + ", "
+                + pallet_location + ", "
+                + pallet_styles_id + ", "
+                + style_po + ", "
+                + pallet_asn // ← Add this
+                + " FROM " + pallet_table
+                + " INNER JOIN " + pallet_styles_table
+                + " ON " + pallet_styles_table + "." + style_pallet_id
+                + " = " + pallet_table + "." + pallet_id
                 + " WHERE " + pallet_location + " LIKE '%" + location + "%'";
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -2785,8 +2803,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 int quantity = cursor.getInt(4);
                 String pallet_location = cursor.getString(5);
                 int pallet_styles_id = cursor.getInt(6);
+                int style_po = Integer.parseInt(cursor.isNull(7) ? String.valueOf(0000) : cursor.getString(7));
+                String pallet_asn = cursor.getString(8);
 
-                StyleSearchByLocationDTO newSearchStyle = new StyleSearchByLocationDTO(style_pallet_id, style_code, style_color, style_size, quantity, pallet_location, pallet_styles_id);
+
+
+                StyleSearchByLocationDTO newSearchStyle = new StyleSearchByLocationDTO(style_pallet_id, style_code, style_color, style_size, quantity, pallet_location, pallet_styles_id, style_po, pallet_asn);
                 returnSearchList.add(newSearchStyle);
 
             } while (cursor.moveToNext());
@@ -2816,6 +2838,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + quantity
                 + ", "
                 + pallet_location
+                + ", "
+                + pallet_asn
+                + ", "
+                + style_po
                 + " FROM "
                 + pallet_table
                 + " INNER JOIN "
@@ -2843,8 +2869,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String style_size = cursor.getString(2);
                 int quantity = cursor.getInt(3);
                 String pallet_location = cursor.getString(4);
+                String pallet_asn = cursor.getString(5);
+                String style_po_val = cursor.isNull(6) ? String.valueOf(0000) : String.valueOf(cursor.getInt(6));
 
-                String newSearchStyle = "\n" + style_code + "#" + style_color + "#" + style_size + "#" + quantity + "#" + pallet_location + "@";
+                String newSearchStyle = "\n" + style_code + "#" + style_color + "#" + style_size + "#" + quantity + "#" + pallet_location + "#" + pallet_asn + "#" + style_po_val + "@";
                 returnSearchList.add(newSearchStyle);
 //                newTop = new StyleSearchDTO("Style Code", "style_color", "style_size", 0, "pallet_location");
 
@@ -2866,60 +2894,66 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public List<StyleSearchDTO> getStylesSearch(String searchTerm) {
-
         List<StyleSearchDTO> returnSearchList = new ArrayList<>();
 
-        String queryString = "SELECT "
-                + style_code
-                + ", "
-                + style_color
-                + ", "
-                + style_size
-                + ", "
-                + quantity
-                + ", "
-                + pallet_location
-                + " FROM "
-                + pallet_table
-                + " INNER JOIN "
-                + pallet_styles_table
-                + " ON "
-                + pallet_styles_table
-                + ". "
-                + style_pallet_id
-                + " = "
-                + pallet_table
-                + ". "
-                + pallet_id
-                + " WHERE " + style_code + " LIKE '%" + searchTerm + "%'";
+        // Log the search term for debugging
+        Log.d("SearchDebug", "Search term: " + searchTerm);
+
+        String queryString = "SELECT " +
+                style_code + ", " +
+                style_color + ", " +
+                style_size + ", " +
+                quantity + ", " +
+                pallet_asn + ", " +
+                pallet_location + ", " +
+                style_po + ", " +
+                pallet_id +
+                " FROM " + pallet_table +
+                " INNER JOIN " + pallet_styles_table +
+                " ON " + pallet_styles_table + "." + style_pallet_id + " = " + pallet_table + "." + pallet_id +
+                " WHERE " + style_code + " LIKE ?";
 
         SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, new String[]{"%" + searchTerm + "%"});
+        Log.d("SearchDebug", "Search cursor: " + cursor.moveToFirst());
 
-        Cursor cursor = db.rawQuery(queryString, null);
+        Log.d("SearchDebug", "Cursor count: " + cursor.getCount());
+        do {
+            for (int i = 0; i < cursor.getColumnCount(); i++) {
+                Log.d("SearchDebug", "Column " + i + ": " + cursor.getColumnName(i) + " = " + cursor.getString(i));
+            }
+        } while (cursor.moveToNext());
 
-        StyleSearchDTO newTop = null;
         if (cursor.moveToFirst()) {
-            // loop through the cursor (result set) and create new objects. Put them into the return list.
             do {
                 String style_code = cursor.getString(0);
+                Log.d("SearchDebug", "Cursor inside do: " + style_code);
+
                 String style_color = cursor.getString(1);
                 String style_size = cursor.getString(2);
                 int quantity = cursor.getInt(3);
-                String pallet_location = cursor.getString(4);
+                String pallet_asn = cursor.getString(4);
+                String pallet_location = cursor.getString(5);
+                int style_po = Integer.parseInt(cursor.isNull(6) ? String.valueOf(0000) : cursor.getString(6));
+                Log.d("SearchDebug", "Cursor inside do the PO: " + style_po);
+                int pallet_id = cursor.getInt(7);
 
-                StyleSearchDTO newSearchStyle = new StyleSearchDTO(style_code, style_color, style_size, quantity, pallet_location);
+
+                StyleSearchDTO newSearchStyle = new StyleSearchDTO(
+                        style_code, style_color, style_size, quantity, pallet_asn, pallet_location, style_po, pallet_id
+                );
+                Log.d("SearchDebug", "Cursor inside do the newSearchStyle: " + newSearchStyle);
+
+
                 returnSearchList.add(newSearchStyle);
-//                newTop = new StyleSearchDTO("Style Code", "style_color", "style_size", 0, "pallet_location");
 
             } while (cursor.moveToNext());
-        } else {
-            // failure. do not add anything to the list.
         }
-
 
         cursor.close();
         db.close();
-//        returnSearchList.add(0, newTop);
+        // Log the search term for debugging
+        Log.d("SearchDebug", "Search list dbh: " + returnSearchList);
         return returnSearchList;
     }
 
@@ -3076,8 +3110,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 String style_color= cursor.getString(3);
                 String style_size = cursor.getString(4);
                 int quantity = cursor.getInt(5);
+                // Assuming style_po is column index 6 and is nullable
+                Integer style_po = null;
+                if (!cursor.isNull(6)) {
+                    style_po = cursor.getInt(6);
+                }
 
-                PalletStylesModel newPalletStyle = new PalletStylesModel(pallet_styles_id, style_pallet_id, style_code, style_color, style_size, quantity);
+                PalletStylesModel newPalletStyle = new PalletStylesModel(pallet_styles_id, style_pallet_id, style_code, style_color, style_size, quantity,
+                        style_po);
                 returnPalletStylesList.add(newPalletStyle);
 
             } while (cursor.moveToNext());
@@ -3108,8 +3148,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
                 int pallet_id = cursor.getInt(0);
                 String pallet_location = cursor.getString(1);
+                String pallet_asn = cursor.getString(2);
 
-                PalletModel newPallet = new PalletModel(pallet_id, pallet_location);
+                PalletModel newPallet = new PalletModel(pallet_id, pallet_location, pallet_asn);
                 returnPalletList.add(newPallet);
 
             } while (cursor.moveToNext());
@@ -3386,4 +3427,38 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else {
         }
     }
+
+    public void updatePalletStyleField(int palletStyleId, String field, String newValue) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        if (newValue == null) {
+            cv.putNull(field);
+        } else {
+            cv.put(field, newValue);
+        }
+
+        db.update(pallet_styles_table, cv, pallet_styles_id + " = ?", new String[]{String.valueOf(palletStyleId)});
+    }
+
+    public boolean updatePallet(PalletModel pallet) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("asn", pallet.getAsn());
+
+        int result = db.update("pallet_table", cv, "pallet_id = ?", new String[]{String.valueOf(pallet.getPallet_id())});
+        return result > 0;
+    }
+
+    // DataBaseHelper.java
+
+    public boolean isDuplicateASN(String asn) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT asn FROM pallet_table WHERE asn = ?", new String[]{asn});
+
+        boolean isDuplicate = cursor.getCount() > 0;
+        cursor.close();
+        return isDuplicate;
+    }
+
 }
